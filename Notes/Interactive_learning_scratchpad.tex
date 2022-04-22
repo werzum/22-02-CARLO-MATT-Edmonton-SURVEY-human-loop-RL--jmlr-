@@ -1,0 +1,75 @@
+Directions:
+\begin{itemize}
+   \item Types of interaction: 1. Student initiated 2. Teacher-initiated 3. Collaborative, single/multi-agent
+   \item Skill levels of interacting parties: expert, novice, mediocre
+   \item Interactive explanations? (Symbolic RL, Interpretable policies)
+    \item Interactive learning in RL (along with Robotics)
+\end{itemize}
+
+
+
+% % \\\sd{Possible directions:\\
+% % \begin{itemize}
+% %     \item Explanation based interactive RL methods?
+% %     \item Visual GUI dependent approaches to aid explanation in RL? (one where policies can be visualized using heat maps?)
+% %     \item Do we want to mention the usual advice exchange methods between humans and agent in this survey? (action-advising, preference, reward shaping, policy shaping, demonstrations)
+% %     \item Should the focus be mainly on interactive methods in RL for Robotics?
+% % \end{itemize}}
+
+
+%% IL Subsection
+
+%Structure
+% Human Teachers in IL
+% What is IL
+% Benefit of Human Teacher, Provide Demonstrations
+% Remove Bias in Demos
+% User Interfaces needed
+
+%This is more along the history of humans coming in?
+Reinforcement Learning with human teachers is an idea that exists since 2006: \cite{Thomaz:2006:RLWithHumanTeachers}. Until that time, the agent was learning individually, with the human only providing the reward scheme. The more detailed this was, the more the agent was performing under the influence of the strategies that the human thought of as profitable. For example, to teach an agent to play chess, one can be intrigued to reward particular actions that have short term benefits but at the same time, this excludes the possibility of the agent uncovering a long term benefit out of this action. Therefore, one of the basic reward schemes supporting exploration is the ``Minimum Time to Goal'' \cite{Harmon:1997:ReinforcementLearningATutorial}, \cite{SuttonBarto:2018:RLIntroduction}: for every state other than the final one, the reward is set to $-1$. The final state can have a reward $\geq 0$, 
+so that the fewer steps reaching the final state needed, the greater is the overall reward. This can lead to longer episodes and a much longer training time overall.  
+
+
+%What is interactive learning (mention some more history)
+Interactive Reinforcement Learning aims at involving humans along with an RL-agent so that the involving parties (human and RL agent) can interact with each other to improve the agent's performance/policy. The role of human is crucial in such settings because they are characterized as teachers with domain knowledge and contextual experience. 
+%They are useful in either identifying the agent's mistakes or providing extra knowledge as inductive bias\cite{} which can scale up the RL agent's learning in terms of sample-efficiency and/or quality.
+Usually, the first indicator for the need for human intervention is model performance, since a bad model is more likely to produce bad policies. However, good models can also lead to bad policies at deployment scenarios. In many cases, human intervention is simulated (using another agent as pseudo-human) since both the parties benefits as the need to know where the imperfections of the model are can be detected before deployment. Another indicator is the agent requiring numerous interaction with the environment, thus leading to very long training time. In such scenarios, a human-in-the-loop can provide useful guidance as inductive bias~\cite{} to the RL-agent in order to learn faster. Human agent interactions can either be teacher-initiated~\cite{}, student-initiated~\cite{} or mixed~\cite{} depending on which party initiates the interaction. A survey paper that presents a taxonomy of all methods that evaluate and incorporate human advice for reward, value and policy shaping, as well as decision biasing, can be found in  \cite{Najar:2021:RLWithHumanAdvice, Arzate:2020:SurveyInteractiveRL}.
+
+
+
+% Beyond reward shaping, action pruning is another way that agent-agnostic human-in-the-loop RL\cite{Abel:2017:AgentAgnosticHumanInTheLoopRL} can improve the learning of an RL agent. Some states that are known to be non-profitable or in some contexts even unsafe can be excluded by the user. Furthermore, the state representation is also a part of the RL algorithm that is directly influenced by the choices of the designer. What kind and how much information, as well as the relations between them, are design choices made typically before the training starts. One of the main future goals is that this gets to be adaptive, with the human-in-the-loop adding and removing relevant and correspondingly non-relevant features in the state representation driven not only by the observed action sequence and performance of the model but also from xAI. 
+
+%Providing demonstrations by expert
+Imitation learning~\cite{SchaalXXX} has been long used to train models from just human demonstrations in a supervised manner. Inspired by this direction, teacher demonstrations of varying optimality have been used inside RL in addition to the agent's online experience to speed up the training process. Before the advent of Deep RL, \cite{kim2013learning} incorporated  demonstrations as linear constraints in the Approximate Policy Iteration framework, posing it as a constrained convex optimization problem. \cite{WangXXX} inferred the confidence of predicted actions from  sub-optimal demonstrations and used this confidence value to decide whether to take this action or randomly explore other actions. Along the Deep RL literature, offline human demonstration data has been used with popular off-policy algorithms for discrete\cite{hester2018deep} and continuous action spaces\cite{nair2018overcoming,vecerik2017leveraging} which includes a separate loss function to mimic the expert behavior. However, some of these~\cite{hester2018deep} have been used just for simple games without application to more complex domains in Robotics. Most of these existing methods assume human demonstations to be provided prior to training without the human getting an idea of the agent's policy.
+
+% Teacher Initiated
+
+Reinforcement Learning with human teachers is an idea that exists since 2006: \cite{Thomaz:2006:RLWithHumanTeachers}. Until that time, the agent was learning individually, with the human only providing the reward scheme. The more detailed this was, the more the agent was performing under the influence of the strategies that the human thought of as profitable. For example, to teach an agent to play chess, one can be intrigued to reward particular actions that have short term benefits but at the same time, this excludes the possibility of the agent uncovering a long term benefit out of this action. Therefore, one of the basic reward schemes supporting exploration is the ``Minimum Time to Goal'' \cite{Harmon:1997:ReinforcementLearningATutorial}, \cite{SuttonBarto:2018:RLIntroduction}: for every state other than the final one, the reward is set to $-1$. The final state can have a reward $\geq 0$, so that the fewer steps reaching the final state needed, the greater is the overall reward. This can lead to longer episodes and a much longer training time overall. 
+
+%This para is about user interfaces
+For effective interaction, the user must evaluate the agent by visualization and explanation of its policies, reward scheme (known or inferred) and even the data that are used before and during the training. This can only be accomplished with the use of adequate UI; even sound interfaces that use the techniques of audification and sonification \cite{Hermann:2011:Sonification}, \cite{Saranti:2009:QuantumHarmonicOscSonification} can be used to guide the human in RL parameter adjusting \cite{Scurto:2021:DesigningDeepRLHumanParameterExploration}. 
+A user interface has a central role to the implementation of interactive user intervention to the reward scheme \cite{Thomaz:2006:RLWithHumanTeachers}. The human is characterized as ``trainer'' and can interfere at any time point of the training process asynchronously, providing a reward in the range of $[-1, +1]$ (kind of a thumbs up or down). This eventually speeds up the training time for that particular task. Nevertheless, at that time the user did not have any additional information about the estimated long-term benefit of the proposed action that might be provided by xAI methods - most importantly counterfactual ones. Users might observe that the strategy of an agent is not effective or the sequence of actions seems ``unnatural'' instead of reshaping the reward function (which can become very complex and consider a lot of aspects to optimize). This and other works like \cite{Christiano:2017:DeepRLHumanPreferences} and \cite{LeeSmithAbbeel:2021:FeedbackPreferenceHITLLearningPEBBLE} acquire human feedback by letting the human compare the learned action sequences and avoid reward exploitation. The relationship between rewards and actions has even been studied in the opposite direction; researchers investigate also what users can infer about the reward scheme by observing actions of the agent \cite{Abbeel:2004:InverseRL}.
+
+%Removing bias in demonstrations
+ Offline human demonstrations may contain biases which can, in turn, be removed by experts  \cite{Wang:2022:SkillPreferences}. A model can be learned from the offline data and then used as a generative one to create an arbitrary amount of data that will help to detect biases easier. Furthermore, users provide feedback on the learned skills, express their preference thereby improve the effectiveness of the algorithm. xAI in that case can also shed light on the biases of the model even before the model is used to generate the data, so that the human expert can - apart from the observed learned agent skills - can have another view of the model and thereby infer a different interpretation of the data \cite{Ribeiro:2016:WhyShouldITrustYou}, \cite{Mehrabi:2021:SurveyBiasFairness}.
+
+%% Causal Learning
+
+% That showed that there is a connection between important parts of the input that are indicative for the discriminative task and the relative certainty of the classifier about its prediction. It is important to note, that the authors do not explicitly state this association as causal (which is scientifically correct), but still open the path for the exploration of causal dependencies between elements in the data and performance of the AI model.
+% (To better understand what a negatively relevant element is, think of a classifier that discriminates between images of dogs and images of cats. After being trained by a convenient dataset, with the images of both classes having the animal in the middle and so on, at test time the neural network is confronted by an image having both a dog and parts of a cat. No matter what class the prediction will be, the certainty of the prediction is expected to be very small. If the prediction is ``dog'', then the elements of the image that belong to the cat are negatively relevant to this class and vice versa. So if a method removes those elements and replaces them with some background information like grass for example, then the prediction performance towards the class ``dog'' is expected to increase). 
+
+In this work, the researchers show that after the application of the xAI method Layer-wise Relevance Propagation (LRP) \cite{Bach:2015:LayerWiseRelevancePropagation}, the removal of elements of the input that positively contribute to a correct prediction will induce a monotonic decrease in the prediction performance. To create a causal model and detect the random variables involved, as well as their values, many removal and additions of positively and negatively relevant elements - the ones that indicate parts that ``speak against'' the predicted class - must be made. 
+
+%% CHallenges subsection
+
+
+%Human versus machine perception
+
+%Several research works consider the similarities and differences of perception capabilities of humans and machine learning models in the medical domain \cite{Makino:2020:DifferencesHumanMachineMedical}. Although both of them can be modelled by the same Probabilistic Graphical Model (PGM) \cite{Koller:2009:ProbabilisticGraphicalModels}, \cite{Saranti:2019:LearningCompetencePGM}, as far as structure goes, they do have significant differences in the learned parameters and predicted outcomes of the posterior variables. Humans are in some cases more robust to perturbations of the input data; it can be shown that machine learning models don't just suffer from dataset shift but also information loss. Furthermore, there is a discrepancy between them, when comparing what parts in the input image were helpful for the diagnosis. By comparison with radiologists diagnoses, researchers can enhance the dataset with images that will occur in medical practice and make the machine learning models more robust to perturbations.
+
+
+% \subsubsection{Opportunities}
+% Large opportunities for reinforcement learning can be found in reducing data requirements for training agents. This can be done via various means, such as Contrastive Learning, MT-Learning, Imitation Learning or Curriculum Learning. In any case can a reduction of explicit data requirements mean a faster deployment of the agent and ideally a system that is more robust in general.
+
+% Generalization and robustness can also be enhanced with approaches of multi-task learning and and meta-learning. Here, we can leverage new modalities and sensors, embue systems with logic (eg. by high-level representations) and focus on inductive biases such as core knowledge \cite{RoyEtAl:2021:RLRoboticsChallenges}. Both approaches also most often include an increase overall performance, especially noted with Multiple Tasks, HITL methods, Sys1Sys2 Approaches of \cite{RoyEtAl:2021:RLRoboticsChallenges}.
