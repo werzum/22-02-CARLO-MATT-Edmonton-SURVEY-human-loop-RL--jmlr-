@@ -147,7 +147,7 @@ The RL paradigm seems to fit well with the long-standing goals of artificial int
 }
 \end{center}
 
-First, we argue that RL is a human-in-the-loop paradigm. There are three distinct stages of where human involvement is critical.
+First, we argue that RL is a human-in-the-loop paradigm, and identify four stages where human involvement is critical. We emphasize that those stages are of cyclic nature and only loosely ordered in the presented sequence, meaning that the individual phases can be repeated and reiterated during the entire process of deployment, or take place in parallel to each other.
 
 \noindent
 \MET{TODO: reformulate to 4 stages, not just focused on learning. Also, not strictly sequential steps -- can be some parallelism}
@@ -161,7 +161,7 @@ First, we argue that RL is a human-in-the-loop paradigm. There are three distinc
         \item Whether the agent should pre-train on existing data (e.g., using offline RL) must be decided by a human.
     \end{itemize}
 \noindent
-\emph{2: During learning}
+\emph{2: During agent learning}
     \begin{itemize}
         \item A human could decide to disallow the agent from selecting invalid actions or actions that are known to always be suboptimal.
         \item A human could decide that an existing controller could bias the agent's action selection to learn faster.
@@ -169,14 +169,20 @@ First, we argue that RL is a human-in-the-loop paradigm. There are three distinc
         \item A subject matter expert should decide if the learning process is ``working well,'' or if the MDP should be revised, either because the agent is learning too slowly, or because the policy being learned is not what was anticipated for the problem.
     \end{itemize}
 \noindent
-\emph{3: After learning}
+\emph{3: Testing learned behavior/behavior Evaluation}
+    \begin{itemize}
+        \item The trained agent is tested by developers and subject matter experts
+        \item A human will need to understand and evaluate the learned policies for sensible micro- and macro-behavior
+        \item Explanations need to scale to be able to make large and complex models understandable
+    \end{itemize}
+\emph{4: Deployment of learned Agent}
     \begin{itemize}
         \item If the agent is learning in a simulation or in a controlled environment, a subject matter expert must decide if the learned policy is ``good enough'' to deploy, if more training is needed, or if the problem definition needs to be changed.
         \item A human will typically need to argue why the agent is safe enough, or should be trusted enough, to be deployed in the real world.
         \item A human will need to determine if the agent should continually learn, if its policy should be frozen, or if it should retrain if the environment has changed ``enough.'' 
     \end{itemize}
 
-Second, in each of these three stages, we argue that explainability is a critical (underdeveloped) technology. Before training, explainability can help show the impact of algorithm or hyperparameter selection, how prior knowledge biases the agent, and how pre-training changes the agent's learning process. During training, explainability can show the impact biasing via an existing controller or human advice, how learning is progressing, or how the current policy functions. After training, explainability can help explain the final policy, improve trust, help the person evaluate safety, and understand the policy's stability.
+Second, in each of these four stages, we argue that explainability is a critical (underdeveloped) technology. Before training, explainability can help show the impact of algorithm or hyperparameter selection, how prior knowledge biases the agent, and how pre-training changes the agent's learning process. During training and testing, explainability can show the impact biasing via an existing controller or human advice, how learning is progressing, or how the current policy functions. In the deployment phase after training, explainability can help explain the final policy, improve trust, help the person evaluate safety, and understand the policy's stability.
 
 Part of this article can be considered as a position paper. We want to convince the reader that ignoring humans and treating RL as a fundamentally autonomous learning paradigm is shortsighted --- we will highlight where and how explainability can play a critical role is this human-agent collaboration. But this article can also be considered a survey. While discussing existing literature on explainability in RL, we will call out three types of problems. Solved problems are those where current explainability techniques can be used to help humans interact with learning agent. Short-term problems are where we could easily adapt or extend existing explainability work to assist humans. Long-term problems are those where significant research is required before a breakthrough can be achieved. Our goal in this article is therefore both to try to shift the discussion about RL in general with respect to human subject experts, machine learning experts, or lay people, and also to provide an entry point into this exciting area of contemporary research at the intersection of explainability on RL, with the goal of getting non-experts quickly up to speed on exciting research directions.
 
@@ -217,19 +223,6 @@ This paper is structured as follows. \MET{TODO}
 % ==================
 \section{Background}
 \label{sec:background}
-
-\subsection{Considerations for a Human-Robot Teamup}
-%Human-robot team (Alessa)
-Robots can be used as physical assistants to help increase human's productivity in a human-robot team. \cite{KhatibEtAl:1999:RihEnvironment} stated that the human-in-the-loop contributes experience, domain knowledge and is able to control the correct execution of tasks. The robot on the other hand can increase the human's capabilities in terms of force, speed and precision. Moreover, the robot should reduce human exposure to harmful and hazardous conditions. According to \cite{DeSaintsEtAl:2008:phri}, only trustworthy robots are able to work in such a team. Due to the close working environment and interaction with the human, it is of utmost importance that the robot is reliable and safe.
-
-%Safety - awareness (Alessa)
-Due to the human's anthropomorphic nature, the users estimation of the robots cognitive capabilities will often be overestimated. \cite{DeSaintsEtAl:2008:phri} argue that a user's mental model might result in a fake robot 'dependability', due to certain aspects or the posture of a robot. When interacting with a robot, a human might have a wrong idea of its awareness, since it looks like a living creature. This further strengthens the problem of safety in a human-robot collaboration.
-
-%Safety - Regulations / Norms (Alessa)
-Industrial robots can be massive and have the potential to cause severe damage to humans. To ensure human integrity, the European Union(EU) enforced the \cite{EUDirective:2006:Machinery}. Furthermore, safety standards for human-robot collaborations were defined, regrading the industrial, as well as the personal care sector.
-One of those standards is the \cite{ISO:13482:2014}, which defines a standard of safety requirements for personal care robots. According to this norm, personal care robots are distinguished into three types: mobile servant robots, physical assistant robots and personal carrier robots. Thus, these robots work in close proximity to humans. In addition, these robots do not only operate in private, but also in public spaces. \cite{SalviniEtAl:2021:ISO13482:2014} argue that \cite{ISO:13482:2014} overlooks the hazards for pedestrians and bystanders, since it does not contain requirements to ensure their safety. However, robots interacting in a public space need to ensure not only the safety of those they assist. Furthermore, they may cause injuries by wrongly predicting a humans action and corresponding to it, or resulting from unexpected behaviour of humans during the interaction.
-
-Moreover, the EU is currently working on a \cite{EC:LegalFramework} and the corresponding \cite{EUResolution:2020:ethicalAI}. Hence, a robot driven by Reinforcement algorithms might also need to adhere to this framework. The framework aims to ensure trust in AI by addressing aspects of explainability, transparency and accountability, as well as safety and privacy. The proposed rules follow a risk-based approach and thus, define different requirements for each risk level. The framework should ensure safety functions of the machinery, by addressing safety risks of AI systems, whereas the currently discussed machinery regulation should ensure the safe integration of the AI system into the machinery. Both regulations are complementary and thus need to be considered individually and jointly.
 
 \subsection{Explainability}
 
@@ -617,7 +610,7 @@ It is also important to note that the approaches for testing are an essential pa
 
 We suggest that a combination of the methods described can help significantly by ensuring that the model has only learned desired behavior. The use of graph-based explanations is recommended as complementary to the policy summarization approach, since the summarizing provides a broad overview of model policy, which can then be further inspected by querying specific explanations. The rapidity and intuitiveness of graph-based explanations can then be a major factor to inspect the learned model policies together with domain experts.
 
-\section{Using RL Agents}
+\section{Deployment}
 
 % Here, benefits from previous steps and general benefits from teamup can be seen
 
@@ -741,6 +734,19 @@ For model testing, we recommend focusing on a tool suite that integrates differe
 % Using - simple and fast highlight-symbol explanations, explaining abstract actions via different modalities, motor warning light and startup sequence
 
 With regard to the application of xAI in HITL approaches, we propose different approaches. For one, we emphasize the need for simple and fast explanations, very much unlike the most common approaches seen today. We furthermore recommend to think about explaining agent actions via different modalities, such as visual indicators, but also haptic or auditory signals, aspects which are largely unexplored as of now. Finally, we envision a suite of tools that allows active warning lights when the agent encounters difficult situations, allowing the user to trust the agent when it is within its generalization capabilities, and communicate it if not. Ultimately, a startup-sequence with different checks would allow the user to ensure that the agent is properly initialized and help greatly with building trust.
+
+\subsection{Considerations for a Human-Robot Teamup}
+
+We envision that the depicted HITL RL approaches could in the future enable a human-robot teamup, which greatly increases human's productivity in a human-robot team. \cite{KhatibEtAl:1999:RihEnvironment} stated that the human-in-the-loop contributes experience, domain knowledge and is able to control the correct execution of tasks. The robot on the other hand can increase the human's capabilities in terms of force, speed and precision. Moreover, the robot should reduce human exposure to harmful and hazardous conditions. According to \cite{DeSaintsEtAl:2008:phri}, only trustworthy robots are able to work in such a team. Due to the close working environment and interaction with the human, it is of utmost importance that the robot is reliable and safe.
+
+%Safety - awareness (Alessa)
+Due to the human's anthropomorphic nature, the users estimation of the robots cognitive capabilities will often be overestimated. \cite{DeSaintsEtAl:2008:phri} argue that a user's mental model might result in a fake robot 'dependability', due to certain aspects or the posture of a robot. When interacting with a robot, a human might have a wrong idea of its awareness, since it looks like a living creature. This further strengthens the problem of safety in a human-robot collaboration.
+
+%Safety - Regulations / Norms (Alessa)
+Industrial robots can be massive and have the potential to cause severe damage to humans. To ensure human integrity, the European Union(EU) enforced the \cite{EUDirective:2006:Machinery}. Furthermore, safety standards for human-robot collaborations were defined, regrading the industrial, as well as the personal care sector.
+One of those standards is the \cite{ISO:13482:2014}, which defines a standard of safety requirements for personal care robots. According to this norm, personal care robots are distinguished into three types: mobile servant robots, physical assistant robots and personal carrier robots. Thus, these robots work in close proximity to humans. In addition, these robots do not only operate in private, but also in public spaces. \cite{SalviniEtAl:2021:ISO13482:2014} argue that \cite{ISO:13482:2014} overlooks the hazards for pedestrians and bystanders, since it does not contain requirements to ensure their safety. However, robots interacting in a public space need to ensure not only the safety of those they assist. Furthermore, they may cause injuries by wrongly predicting a humans action and corresponding to it, or resulting from unexpected behaviour of humans during the interaction.
+
+Moreover, the EU is currently working on a \cite{EC:LegalFramework} and the corresponding \cite{EUResolution:2020:ethicalAI}. Hence, a robot driven by Reinforcement algorithms might also need to adhere to this framework. The framework aims to ensure trust in AI by addressing aspects of explainability, transparency and accountability, as well as safety and privacy. The proposed rules follow a risk-based approach and thus, define different requirements for each risk level. The framework should ensure safety functions of the machinery, by addressing safety risks of AI systems, whereas the currently discussed machinery regulation should ensure the safe integration of the AI system into the machinery. Both regulations are complementary and thus need to be considered individually and jointly.
 
 \section{Conclusion and Future Outlook}
 
