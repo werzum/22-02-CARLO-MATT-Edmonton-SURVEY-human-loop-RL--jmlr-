@@ -66,15 +66,6 @@ x/22}{X/22}{20-212}{Carl O. Retzlaff, Anna Saranti, Alessa Angerschmid, N.N., Ma
 \addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
 and DAI Lab, TU Berlin, Germany\\ \\
 \AND
-\name Anna Saranti \email anna.saranti@human-centered.ai \\
-\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
-\AND
-\name Alessa Angerschmid \email alessa.angerschmid@human-centered.ai \\
-\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
-\AND
-\name N.N. \email n.n. \\
-\addr N.N. \\ N.N.
-\AND
 \name Matthew E.~Taylor \email matthew.e.taylor@ualberta.ca \\
 \addr Department of Computing Science\\
 Alberta Machine Intelligence Institute\\
@@ -83,7 +74,29 @@ University of Alberta, Canada
 \name Andreas Holzinger \email andreas.holzinger@human-centered.ai \\
 \addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria \\
 and xAI Lab, Alberta Machine Intelligence Institute, University of Alberta, Canada
+AND
+\name Payam \email n.n. \\
+\addr N.N. \\ N.N.
+\AND
+\name Srijita \email n.n. \\
+\addr N.N. \\ N.N.
+\AND
+\name Christabel \email n.n. \\
+\addr N.N. \\ N.N.
+\AND
+\name Anna Saranti \email anna.saranti@human-centered.ai \\
+\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
+\AND
+\name Alessa Angerschmid \email alessa.angerschmid@human-centered.ai \\
+\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
+\AND
+\name Mohammad \email n.n. \\
+\addr N.N. \\ N.N.
+\AND
+\name Tianpei \email n.n. \\
+\addr N.N. \\ N.N.
 }
+
 
 \editor{N.N.}
 
@@ -293,6 +306,30 @@ The third aspect is the interpretable decision-making of RL, which means interpr
 
 %The last aspect in the scope of explainable RL focuses on providing some explanations of RL models. Such explanations are obtained via a post-hoc and often model-agnostic manner after learning a black-box model. A lot of contextual information should be taken into consideration when defining what constitutes a ”good” explanation for a task, e.g., the background knowledge and levels of expertise of the addressee of this explanation, their needs, and expectations. The explanations types are various, like visual \citep{DBLP:journals/corr/abs-1912-12191,DBLP:journals/corr/abs-1912-05743}, textual \citep{HayesShah:2017:AutonomousPolicyExplanation,fukuchi2017autonomous}, causal \citep{MadumalEtAl:2020:CausalRLCFs,Madumal:2020:DistalEF}, or decision tree explanations \citep{bastani2018verifiable}.
 
+% Causal Learning subsection
+
+A relatively new and fundamentally different approach to explainability is provided by causal models. Explainable AI methods that construct causal models, like Probabilistic Graphical Models (PGM) \cite{Koller:2009:ProbabilisticGraphicalModelsBook}, \cite{Saranti:2019:LearningCompetencePGMs} are slowly emerging in the international literature, mainly because it is shown that neural networks base their decisions on correlations between input data and the solving task \cite{Lapuschkin:2019:UnmaskingCleverHans}. 
+% GNN
+Another causal learning method are Graph Neural Networks (GNN) \cite{Vu:2020:PGMExplainer}, which work by the prediction of performance-driven search of node, edge and features thereof addition and removal actions that support an informed creation of a causal model. Current work is also incorporating the human-in-the-loop strategy \cite{Holzinger:2016:iML} where the domain knowledge of an expert is also used for the choice of actions. 
+
+% Use opportunity chains as modality for good explanations
+Madumal et al. for example encode causal models using \emph{action influence graphs} to generate explanation using \emph{causal chains} resulting in better explanations as well as improved prediction performance \cite{MadumalEtAl:2020:CausalRLCFs}. In their more recent work \cite{Madumal:2020:DistalEF}, they propose that investigating interactions between RL agents and humans is the key to generating finer details in the explanations thus alleviating some of the shortcomings of the action influence models. An insight gained through their human studies was that to generate explanations, humans tend to refer to \emph{future} actions that were dependent on the current ones. This supports the idea that humans have a deep understanding of cause and effect chains of actions and events, often referred to as \emph{opportunity chains} in the cognitive psychology literature. Inspired by this, the authors create explanatory models that focus on these opportunity chains and the future actions, they call \emph{distal} action. 
+
+% connection to HITL
+Liang et al. \cite{LiangEtAl:2017:HITLReinforcementLearn} argue that the cognitive ability of the human operator paired with the computational power of a machine have the potential to handle complex tasks. Moreover, they state that it is essential for a good interaction that the machine is able to react to the environment but also the human operator. This was already highlighted by safety measurements which showed that the machine needs to pay attention on the operator as well as the environment and possible bystanders. Furthermore, humans need to understand and interpret the explanation of the machine correctly to improve the algorithm \cite{heuillet2021explainability}. Moreover, Heulliet et al. \cite{heuillet2021explainability} state that the underlying algorithm and its decision need to be understandable for a multitude of different audiences with various goals.
+
+% Counterfactuals
+
+With the help of adequate personalized User Interfaces (UI) \cite{Sun:2021:TopologyPerturbationGNNs}, counterfactuals can also be created by following an action sequence driven by human expertise. This can be also injected in the form of the priors of the random variables and consists a form of inductive bias.  Other approaches that generate counterfactual explanations \cite{HolzingerEtAl:2021:MultiModalCausabilityGNN} can be built with the help of a sequence of actions that has the ultimate goal of answering the question ``what if'' \cite{Pearl:2018:CausalCounterfactualInference}, \cite{Pearl:2018:TheBookOfWhy}, \cite{Marletto:2021:ScienceCanCant}.
+
+% How to give knowledge to the system
+Beyond counterfactuals, ``opportunity chains'' contain a sequence of events with causal dependency, and contain the concept of enabling events down this sequence \cite{Madumal:2020:DistalEF}. A Recurrent Neural Network model (RNN) \cite{Hochreiter:1997:Lstm} can be used to learn those opportunity chains from the causal chains, that will be used as an input. This is called a distal explanation model, and it is not used as an explanation by itself, but rather as a basis for an action influence model leading to a learned decision tree, which - under particular conditions - is considered explainable \cite{Jung:2020:ExplainableEmpiricalRiskMinimization}. Humans can be presented with distal explanations and learn which actions enable others further down the causal chain, and from that predict what action the agent will do next. The researchers showed that agents that incorporated human explanations in conceptual form as a prior, can be studied by humans to further be analyzed based on their new generated explanations.
+
+% Not just use human explanations as prior, but use expertise to imitate
+Observational data from expert actions go beyond injecting a prior to an explainable model \cite{Zhang:2020:CausalImitationLearning}. Causal imitation learning learns a Structural Causal Model (SCM) \cite{Pearl:2000:ModelsReasoningInference} from policies performed by humans, even if the actual reward is not specified and the environment is not perceived the same to the learner and the human expert demonstrator. But this can also be beneficial since researchers have shown that incorporating that knowledge maximizes the aggregated reward, even if it sacrifices some autonomy. 
+
+Dynamic SCMs are incorporated to formalize the Partially-observable Markov Decision Process (POMDPs) \cite{SuttonBarto:2018:RLIntroduction} - as perceived by the agent - and take into account the human intervention and its implications. The so-called counterfactual agent does not blindly take the human's advice and execute it; it compares it with other possible actions and decides correspondingly. In cases where the reward and the transition functions are the same, the ``human-in-the-loop'' is beneficial, even if the human's instructions are far from perfect. The implications that this will have on the explainability of the learned models are a vital area of future research. Especially in the latter case, where the human needs to provide adequate instructions in selected states, the human understanding of the agent's current SCM, is vital.  
+
 
 \subsection{Interactive Learning}
 
@@ -367,41 +404,7 @@ Besides interpretability, explainability can also improve interactions between h
 
 %Typically, the offline data that will be used for training the Deep RL algorithm are either generated or selected by humans. By default, they may contain biases which can, in turn, be removed by experts  \cite{Wang:2022:SkillPreferences}. A model can be learned from the offline data and then used as a generative one to create an arbitrary amount of data that will help to detect biases easier. Furthermore, users provide feedback on the learned skills, express their preference thereby improve the effectiveness of the algorithm. xAI in that case can also shed light on the biases of the model even before the model is used to generate the data, so that the human expert can - apart from the observed learned agent skills - can have another view of the model and thereby infer a different interpretation of the data \cite{Ribeiro:2016:WhyShouldITrustYou}, \cite{Mehrabi:2021:SurveyBiasFairness}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Causal Learning}
-\label{sec:CausalLearning}
 
-Explainable AI methods that construct causal models, like Probabilistic Graphical Models (PGM) \cite{Koller:2009:ProbabilisticGraphicalModelsBook}, \cite{Saranti:2019:LearningCompetencePGMs} are slowly emerging in the international literature, mainly because it is shown that neural networks base their decisions on correlations between input data and the solving task \cite{Lapuschkin:2019:UnmaskingCleverHans}. One of the forerunners of research towards uncovering causal dependencies in AI solutions is Perturbation Analysis \cite{Arras:2017:ExplainingRNNsPerturbationAnalysis}. 
-
-% GNN
-
-A more recent method invented for the creation of causal explanation models is used for Graph Neural Networks (GNN) \cite{Vu:2020:PGMExplainer}. This method works by GNN's prediction performance-driven search of node, edge and features thereof addition and removal actions that support an informed creation of a causal model. Current work is also incorporating the human-in-the-loop strategy \cite{Holzinger:2016:iML} where the domain knowledge of an expert is also used for the choice of actions. 
-
-% Inform user and allow him to also give knowledge into the system
-
-Generally, performance metrics, xAI applications and any information that can be provided to the user can also influence his or her decision, but humans will have the ability to bring their knowledge in the process. As a concrete example, in the case of a model that performs poorly, even the best xAI method will not return reliable relevance values; the human expertise of what action is most profitable for the generation of counterfactual is immensely valuable. Research work in the near future is expected to compare and combine the two approaches and future xAI methods already strive to make explanations actionable \cite{Pfeifer:2021:NetworkModuleDetection}, in the sense that they support, enhance and promote informative human interaction.
-
-% Counterfactuals
-
-With the help of adequate personalized User Interfaces (UI) \cite{Sun:2021:TopologyPerturbationGNNs}, counterfactuals can also be created by following an action sequence driven by human expertise. This can be also injected in the form of the priors of the random variables and consists a form of inductive bias.  Other approaches that generate counterfactual explanations \cite{HolzingerEtAl:2021:MultiModalCausabilityGNN} can be built with the help of a sequence of actions that has the ultimate goal of answering the question ``what if'' \cite{Pearl:2018:CausalCounterfactualInference}, \cite{Pearl:2018:TheBookOfWhy}, \cite{Marletto:2021:ScienceCanCant}.
-
-% How to give knowledge to the system
-
-Beyond counterfactuals, ``opportunity chains'' contain a sequence of events with causal dependency, and contain the concept of enabling events down this sequence \cite{Madumal:2020:DistalEF}. A Recurrent Neural Network model (RNN) \cite{Hochreiter:1997:Lstm} can be used to learn those opportunity chains from the causal chains, that will be used as an input. This is called a distal explanation model, and it is not used as an explanation by itself, but rather as a basis for an action influence model leading to a learned decision tree, which - under particular conditions - is considered explainable \cite{Jung:2020:ExplainableEmpiricalRiskMinimization}. Humans can be presented with distal explanations and learn which actions enable others further down the causal chain, and from that predict what action the agent will do next. The researchers showed that agents that incorporated human explanations in conceptual form as a prior, can be studied by humans to further be analyzed based on their new generated explanations.
-
-Furthermore, the fundamental question of counterfactuals ``why'' and ``why not'', is replaced by the question ``why action A'' and ``why not action A'', with a reward down the line indicating a profitable policy. The decision tree helps enormously as an explainable surrogate model of the policy. The decision tree can be used as a generative model and produce minimally complete explanations; each decision node contains a decision boundary that on its own can be shifted by a small amount and generate contrastive explanations. The distal explanations produced as an output of the RNN contain the distal action prediction by means of the previous states and actions of the agent. They are qualitatively better on the Likert scale \cite{Hoffman:2018:MetricsXAI} from causal explanations, since they contain the actions that enable other important ones, thereby uncovering even more underlying dynamics in adversarial, rescue and collaborative task scenarios presented to the human evaluators.
-
-% Not just use human explanations as prior, but use expertise to imitate
-Observational data from expert actions go beyond injecting a prior to an explainable model \cite{Zhang:2020:CausalImitationLearning}. Causal imitation learning learns a Structural Causal Model (SCM) \cite{Pearl:2000:ModelsReasoningInference} from policies performed by humans, even if the actual reward is not specified and the environment is not perceived the same to the learner and the human expert demonstrator. But this can also be beneficial since researchers have shown that incorporating that knowledge maximizes the aggregated reward, even if it sacrifices some autonomy. 
-
-Dynamic SCMs are incorporated to formalize the Partially-observable Markov Decision Process (POMDPs) \cite{SuttonBarto:2018:RLIntroduction} - as perceived by the agent - and take into account the human intervention and its implications. The so-called counterfactual agent does not blindly take the human's advice and execute it; it compares it with other possible actions and decides correspondingly. In cases where the reward and the transition functions are the same, the ``human-in-the-loop'' is beneficial, even if the human's instructions are far from perfect. The implications that this will have on the explainability of the learned models are a vital area of future research. Especially in the latter case, where the human needs to provide adequate instructions in selected states, the human understanding of the agent's current SCM, is vital.  
-
-% Use opportunity chains as modality for good explanations
-In their previous work, Madumal et al., encode causal models using \emph{action influence graphs} to generate explanation using \emph{causal chains} resulting in better explanations as well as improved prediction performance \cite{MadumalEtAl:2020:CausalRLCFs}. In their more recent work \cite{Madumal:2020:DistalEF}, they propose that investigating interactions between RL agents and humans is the key to generating finer details in the explanations thus alleviating some of the shortcomings of the action influence models. An insight gained through their human studies was that to generate explanations, humans tend to refer to \emph{future} actions that were dependent on the current ones. This supports the idea that humans have a deep understanding of cause and effect chains of actions and events, often referred to as \emph{opportunity chains} in the cognitive psychology literature. Inspired by this, the authors create explanatory models that focus on these opportunity chains and the future actions, they call \emph{distal} action. 
-
-% connection to HITL
-Liang et al. \cite{LiangEtAl:2017:HITLReinforcementLearn} argue that the cognitive ability of the human operator paired with the computational power of a machine have the potential to handle complex tasks. Moreover, they state that it is essential for a good interaction that the machine is able to react to the environment but also the human operator. This was already highlighted by safety measurements which showed that the machine needs to pay attention on the operator as well as the environment and possible bystanders. Furthermore, humans need to understand and interpret the explanation of the machine correctly to improve the algorithm \cite{heuillet2021explainability}. Moreover, Heulliet et al. \cite{heuillet2021explainability} state that the underlying algorithm and its decision need to be understandable for a multitude of different audiences with various goals.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Challenges for Reinforcement Learning and HITL approaches}
 
 We elaborated on considerations for robot-human teamup approaches, how they interface with explainable AI approaches and basics for Interactive and Causal Learning. To conclude the background section, we want to talk about underlying challenges for Reinforcement Learning in general and those more specific to embodied intelligence in order to get a better understanding of fundamental and current challenges in the field.
