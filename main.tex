@@ -665,7 +665,7 @@ The startup sequence approach could complement this error handling concept. \cit
 
 \section{Discussion}
 
-We first want to discuss some general challenges in HITL RL approaches, and then treat the presented opportunities and requirements in a three-stage approach. At stage one, we discuss what is possible with current methods. Stage two contains a discussion on how current methods should be adapted to better suit the HITL requirements. The third generation is concerned with future generation approaches that will require new research, methods and technology.
+We first want to discuss some general challenges in HITL RL approaches, and then treat the presented opportunities and requirements in a three-stage approach. At stage one, we discuss what is possible with current methods. These approaches can be mainly found in the background section. Stage two contains a discussion on how current methods should be adapted to better suit the HITL requirements, which is applied to the sections discussing the four steps required for deployment of HITL systems. The third generation is discussed in the Discussion section and is concerned with future generation approaches that will require new research, methods and technology.
 
 \subsection{Challenges}
 
@@ -677,45 +677,6 @@ The human-robot teamup comes with challenges beyond the explainability as descri
 
 As for explainability, most work in xAI is based on what researcher deems a good explanation, which is heavily biased \cite{Miller:2019:xAISocialSciencesInsights}. Most models and approaches lack understanding of the human end user, and need to adapt their language and modalities accordingly. This requires to use human-centered development \cite{PuiuttaVeith:2020:xAIRLSurvey}. To ensure that explainability methods orient themselves at the end user and take their respective step (as proposed here) into account, a comprehensive guideline with factors to consider when developing xAI systems could be created to help with this process.
 
-\subsection{First Generation approaches}
-
-% Developing - model code summaries
-
-We see that many approaches for model summaries as code have already been proposed \citep{VermaEtAl:2018:ProgrammaticallyInterpretableRL}, and think that those could be very helpful for understanding the fundamental understanding of model behavior as proposed for the "Developing" step. In general, the combination of interpretable models with pre-training should allow an inherently understandable model.
-
-% Teaching - many options, PBL, CFs, Imitation Learning
-
-The agent learning step can alreday benefit from a large choice of xAI approaches. We propose that the combination of preference-based approaches like \citep{LeeSmithAbbeel:2021:FeedbackPreferenceHITLLearningPEBBLE}, imitation-learning like \cite{HusseinEtAl:2017:ImitationLearning} together with active querying approaches as seen in autonomous driving \cite{WuEtAl:2021:HITLDRLAutonomousDriving}.
-
-% Testing - Policy Summarization and Active Learning
-
-For the testing step, we find that there exist many fitting policy summarization approaches \cite{LiuEtAl:2018:LinearModelUTrees}, which when using an appropriate modality could form the first part of the testing step. We also highlight various graph-based approaches like \cite{SongEtAl:2019:ExplainableGraphBasedRecommendations}, which could provide a good high-level overview of the learned model.
-
-% Using - Low-tech action indication, showing model perception
-
-As for first generation approaches, we found the fewest which are appropriate for using HITL systems. There exists a groundwork to show intended model actions like \cite{Caltagarione:2017:DrivingPathGeneration}, or compute and communicate uncertainty \citep{JainEtAl:2021:EpistemicUncertaintyPrediction}. Those approaches however require a lot of adaption to be useful in HITL scenarios.
-
-\subsection{Second Generation approaches}
-
-For the second generation, we discuss how different approaches could be adapted to better suit general HITL requirements, and those specific to the individual steps.
-%think about how to adapt!
-
-% Developing - using compositional and representational languages, causal learning
-
-For the developing phase, we suggest to use compositional and representational language for explainability to enhance the intuitive understandability of models as mentioned by \citet{RoyEtAl:2021:RLRoboticsChallenges}. We furthermore think that causal learning approaches should be adapted and integrated much more deeply into HITL approaches, since they could not only help with generating better explanations, but also better prediction performance as exemplified by \citet{MadumalEtAl:2020:CausalRLCFs}. Thirdly, policy querying approaches like \citet{HayesShah:2017:AutonomousPolicyExplanation} could be adapted to allow specific inquiries into model structure, and be expanded with counterfactual structures.
-
-% Teaching - adapt approaches to RL contexts
-
-For the agent learning step, the various approaches enumerated in the first generation should be adapted further for RL/HITL contexts. An important adaption is also the provision of a suite of tools to facilitate using different approaches and consequently find the individual sweet-spot mix of different approaches. Adapting the tools to work in a succession that builds fundamental behavior with imitation learning, followed by fine-tuning actions by preference-based learning finally identifying and solving weak spots with querying approaches is only one possible combination.
-
-% Testing - ensure approaches are scalable and expert-readable
-
-We highlighted that many explainability approaches which suffice in the developing and learning phase need adaptation to the testing stage due to model size and complexity. Approaches like code block summarization as provided by \citet{VermaEtAl:2018:ProgrammaticallyInterpretableRL} could be extended by focusing only on relevant parts of the explanation as illustrated by \citet{Vu:2020:PGMExplainer}. Furthermore, expert-readability needs to be ensured to allow subject matter experts to help with the testing and evaluating whether the learned policies are sensible.
-
-% Using - modify for other contexts than autonomous driving, adapt to other modalities than dashboard
-
-With regard to using explainability in HITL approaches, we propose that the currently available approaches look beyond the scope of autonomous driving and consider use cases such as explaining textual computations (as seen in credit or policy computations). Also, modalities beside graphic dashboards should be considered to ensure that the full potential of HITL approaches is reached. Auditory and tactic perspectives should be explored, while visual perspectives should be explored also in other form-factors such as smartwatches, LED indicators and image projections.
-
 \subsection{Third Generation approaches}
 
 % Blue Sky
@@ -724,19 +685,24 @@ The third generation of approaches consists of blue sky propositions, which are 
 
 % Developing - Interactive, thorough and comparable model summaries
 
-For the development phase, we envision interactive, thorough and comparable model summaries. Individual components of such a solution can already be found, but the simplicity of a comprehensive solution could greatly benefit such a process.
+We suggest to use compositional and representational language for explainability to enhance the intuitive understandability of models as mentioned by \citet{RoyEtAl:2021:RLRoboticsChallenges}. We furthermore think that causal learning approaches should be adapted and integrated much more deeply into HITL approaches, since they could not only help with generating better explanations, but also better prediction performance as exemplified by \citet{MadumalEtAl:2020:CausalRLCFs}. Thirdly, policy querying approaches like \citet{HayesShah:2017:AutonomousPolicyExplanation} could be adapted to allow specific inquiries into model structure, and be expanded with counterfactual structures.
+We ultimately envision interactive, thorough and comparable model summaries. Individual components of such a solution can already be found, but the simplicity of a comprehensive solution could greatly benefit such a process.
+
 
 % Teaching - Efficient training in the field, with replanning and corrections
 
-As for agent learning, we propose a solution that allows efficient HITL training in the field and with subject matter experts, enabling users to rapidly bootstrap agent behavior and support this process further with replanning and corrections. A combination of such approaches could be very efficient and fast in bringing up robust agents suited for real-world applications.
+For the agent learning step, the various approaches enumerated in the first generation should be adapted further for RL/HITL contexts. An important adaption is also the provision of a suite of tools to facilitate using different approaches and consequently find the individual sweet-spot mix of different approaches. Adapting the tools to work in a succession that builds fundamental behavior with imitation learning, followed by fine-tuning actions by preference-based learning finally identifying and solving weak spots with querying approaches is only one possible combination.
+We propose the goal of a solution that allows efficient HITL training in the field and with subject matter experts, enabling users to rapidly bootstrap agent behavior and support this process further with replanning and corrections. A combination of such approaches could be very efficient and fast in bringing up robust agents suited for real-world applications.
 
 % Testing - Thorough model decision explanations, with detailed diffs
 
-For model testing, we recommend focusing on a tool suite that integrates different tools which help scrutinize a model from many different viewpoints. On a underlying matter, we propose that thorough model decision explanations are essential for this process. Furthermore, the focus should be on providing explanations in such a way that they are understandable to the subject matter expert, allowing to not only debug superficial model behavior, but also check the learned routines for semantically sensible behavior. This can not be done by the software developers themselves, and affords explanations in a user-specific language.
+We highlighted that many explainability approaches which suffice in the developing and learning phase need adaptation to the testing stage due to model size and complexity. Approaches like code block summarization as provided by \citet{VermaEtAl:2018:ProgrammaticallyInterpretableRL} could be extended by focusing only on relevant parts of the explanation as illustrated by \citet{Vu:2020:PGMExplainer}. Furthermore, expert-readability needs to be ensured to allow subject matter experts to help with the testing and evaluating whether the learned policies are sensible.
+We recommend focusing on a tool suite that integrates different tools which help scrutinize a model from many different viewpoints. On a underlying matter, we propose that thorough model decision explanations are essential for this process. Furthermore, the focus should be on providing explanations in such a way that they are understandable to the subject matter expert, allowing to not only debug superficial model behavior, but also check the learned routines for semantically sensible behavior. This can not be done by the software developers themselves, and affords explanations in a user-specific language.
 
 % Using - simple and fast highlight-symbol explanations, explaining abstract actions via different modalities, motor warning light and startup sequence
 
-With regard to the application of xAI in HITL approaches, we propose different approaches. For one, we emphasize the need for simple and fast explanations, very much unlike the most common approaches seen today. We furthermore recommend to think about explaining agent actions via different modalities, such as visual indicators, but also haptic or auditory signals, aspects which are largely unexplored as of now. Finally, we envision a suite of tools that allows active warning lights when the agent encounters difficult situations, allowing the user to trust the agent when it is within its generalization capabilities, and communicate it if not. Ultimately, a startup-sequence with different checks would allow the user to ensure that the agent is properly initialized and help greatly with building trust.
+With regard to using explainability in HITL approaches, we propose that the currently available approaches look beyond the scope of autonomous driving and consider use cases such as explaining textual computations (as seen in credit or policy computations). Also, modalities beside graphic dashboards should be considered to ensure that the full potential of HITL approaches is reached. Auditory and tactic perspectives should be explored, while visual perspectives should be explored also in other form-factors such as smartwatches, LED indicators and image projections.
+For one, we emphasize the need for simple and fast explanations, very much unlike the most common approaches seen today. We furthermore recommend to think about explaining agent actions via different modalities, such as visual indicators, but also haptic or auditory signals, aspects which are largely unexplored as of now. Finally, we envision a suite of tools that allows active warning lights when the agent encounters difficult situations, allowing the user to trust the agent when it is within its generalization capabilities, and communicate it if not. Ultimately, a startup-sequence with different checks would allow the user to ensure that the agent is properly initialized and help greatly with building trust.
 
 \subsection{Considerations for a Human-Robot Teamup}
 
