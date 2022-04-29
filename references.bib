@@ -80,6 +80,14 @@ month = {May},
 We demonstrate our approach on the task of manipulating objects with a robotic arm. In particular, we run experiments on three different tasks: pushing, sliding, and pick-and-place, in each case using only binary rewards indicating whether or not the task is completed. Our ablation studies show that Hindsight Experience Replay is a crucial ingredient which makes training possible in these challenging environments. We show that our policies trained on a physics simulation can be deployed on a physical robot and successfully complete the task.}
 }
 
+@article{araiza2019safe,
+  title={Safe and trustworthy human-robot interaction},
+  author={Araiza-Illan, D and Eder, K},
+  journal={Humanoid Robotics: A Reference, eds A. Goswami and P. Vadakkepat (Dordrecht: Springer Netherlands)},
+  pages={2397--2419},
+  year={2019}
+}
+
 @article{arakawa:18,
   title={Dqn-tamer: Human-in-the-loop reinforcement learning with intractable feedback},
   author={Arakawa, Riku and Kobayashi, Sosuke and Unno, Yuya and Tsuboi, Yuta and Maeda, Shin-ichi},
@@ -925,6 +933,22 @@ conceptual framework and psychological mechanisms of human behavior explanation 
   abstract={Although deep neural networks have been widely employed and proven effective in sen- timent analysis tasks, it remains challenging for model developers to assess their models for erroneous predictions that might exist prior to deployment. Once deployed, emergent er- rors can be hard to identify in prediction run- time and impossible to trace back to their sources. To address such gaps, in this paper we propose an error detection framework for sentiment analysis based on explainable fea- tures. We perform global-level feature valida- tion with human-in-the-loop assessment, fol- lowed by an integration of global and local- level feature contribution analysis. Experimen- tal results show that, given limited human-in- the-loop intervention, our method is able to identify erroneous model predictions on un- seen data with high precision.}
 }
 
+@article{LuetjensEverettHow:2018:RLModelUncertainty
+  author    = {Bj{\"{o}}rn L{\"{u}}tjens and
+               Michael Everett and
+               Jonathan P. How},
+  title     = {Safe Reinforcement Learning with Model Uncertainty Estimates},
+  journal   = {CoRR},
+  volume    = {abs/1810.08700},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1810.08700},
+  eprinttype = {arXiv},
+  eprint    = {1810.08700},
+  timestamp = {Wed, 31 Oct 2018 14:24:29 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1810-08700.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  abstract  = {Many current autonomous systems are being designed with a strong reliance on black box predictions from deep neural networks (DNNs). However, DNNs tend to be overconfident in predictions on unseen data and can give unpredictable results for far-from-distribution test data. The importance of predictions that are robust to this distributional shift is evident for safety-critical applications, such as collision avoidance around pedestrians. Measures of model uncertainty can be used to identify unseen data, but the state-of-the-art extraction methods such as Bayesian neural networks are mostly intractable to compute. This paper uses MC-Dropout and Bootstrapping to give computationally tractable and parallelizable uncertainty estimates. The methods are embedded in a Safe Reinforcement Learning framework to form uncertainty-aware navigation around pedestrians. The result is a collision avoidance policy that knows what it does not know and cautiously avoids pedestrians that exhibit unseen behavior. The policy is demonstrated in simulation to be more robust to novel observations and take safer actions than an uncertainty-unaware baseline.}
+}
 %%% MMM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 @inproceedings{macglashan2017interactive,
   title={Interactive learning from policy-dependent human feedback},
