@@ -61,11 +61,30 @@ x/22}{X/22}{20-212}{Carl O. Retzlaff, Anna Saranti, Alessa Angerschmid, N.N., Ma
 
 \begin{document}
 
-\title{Deadline: April, 20, 2022 Human-in-the-Loop Approaches for Reinforcement Learning: A Survey}
+\title{Human-in-the-Loop Approaches for Reinforcement Learning: A Survey}
 
 \author{\name Carl Orge Retzlaff \email carl.retzlaff@human-centered.ai\\ 
 \addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
-and DAI Lab, TU Berlin, Germany\\ \\
+and DAI Lab, TU Berlin, Germany\\
+\AND
+\name Anna Saranti \email anna.saranti@human-centered.ai \\
+\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
+\AND
+\name Alessa Angerschmid \email alessa.angerschmid@human-centered.ai \\
+\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
+\AND
+\name Payam Mousavi \email payam.mousavi@amii.ca \\
+\addr Alberta Machine Intelligence Institute\\
+\AND
+\name Srijita Das\email srijita1@ualberta.ca \\
+\addr Department of Computing Science \\ 
+University of Alberta, Canada
+\AND
+\name Christabel Wayllace\email wayllace@ualberta.ca \\
+\addr Department of Computing Science \\ University of Alberta, Canada\\
+\AND
+\name Mohammad Afshari\email mafshari@ualberta.ca \\
+\addr Department of Computing Science \\ University of Alberta, Canada
 \AND
 \name Matthew E.~Taylor \email matthew.e.taylor@ualberta.ca \\
 \addr Department of Computing Science\\
@@ -74,29 +93,8 @@ University of Alberta, Canada
 \AND
 \name Andreas Holzinger \email andreas.holzinger@human-centered.ai \\
 \addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria \\
-and xAI Lab, Alberta Machine Intelligence Institute, University of Alberta, Canada
-\AND
-\name Payam Mousavi \email payam.mousavi@amii.ca \\
-\addr Alberta Machine Intelligence Institute (AMII) \\ N.N.
-\AND
-\name Srijita Das\email srijita1@ualberta.ca \\
-\addr Department of Computing Science \\ 
+and xAI Lab, Alberta Machine Intelligence Institute\\
 University of Alberta, Canada
-\AND
-\name Christabel Wayllace\email wayllace@ualberta.ca \\
-\addr Department of Computing Science \\ University of Alberta, Canada
-\AND
-\name Anna Saranti \email anna.saranti@human-centered.ai \\
-\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
-\AND
-\name Alessa Angerschmid \email alessa.angerschmid@human-centered.ai \\
-\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
-\AND
-\name Mohammad Afshari\email mafshari@ualberta.ca \\
-\addr Department of Computing Science \\ University of Alberta, Canada
-\AND
-\name Tianpei \email n.n. \\
-\addr N.N. \\ N.N.
 }
 
 
@@ -156,27 +154,26 @@ The RL paradigm seems to fit well with the long-standing goals of artificial int
     \parbox{0.95\textwidth}{
          \begin{enumerate}
             \item Reinforcement learning is fundamentally a human-in-the-loop paradigm and 
-            \item Explainability (or interpretability) is critical for the success of real-world \\reinforcement learning systems.
+            \item Explainability is critical for the success of real-world \\reinforcement learning systems.
         \end{enumerate}
      }%
 }
 \end{center}
 
-First, we argue that RL is a human-in-the-loop paradigm, and identify four stages where human involvement is critical. We emphasize that those stages are of cyclic nature and only loosely ordered in the presented sequence, meaning that the individual phases can be repeated and reiterated during the entire process of deployment, or take place in parallel to each other.
+First, we argue that RL is a human-in-the-loop paradigm, and identify four stages where human involvement is critical towards the goal of deploying and using RL agents. We emphasize that those stages are of cyclic nature and only loosely ordered in the presented sequence, meaning that the individual phases can be repeated and reiterated during the entire process of deployment.
 
 \noindent
-\MET{TODO: reformulate to 4 stages, not just focused on learning. Also, not strictly sequential steps -- can be some parallelism}
-\emph{1: Development - problem formulation and pre-learning considerations}
+\emph{1: Initial Agent Development}
     \begin{itemize}
-        \item The agent's environment is first selected by a human based on where they think an RL agent might be useful. 
+        \item The agent's environment is first selected by a human based on where they think an RL agent might be useful, defining the problem to be solved.
         \item Human machine learning and/or subject matter specialists construct a Markov decision process (MDP), defining the state space, action space, and reward function --- all three have a critical impact on the speed of learning, the agent's final performance, and what policy is learned. 
         \item The agent's algorithm and hyperparameters are set by a machine learning practitioner. 
         \item The decision whether to incorporate prior knowledge, such as by adding detailed features or transferring knowledge from an existing agent 
         can only be made by a human. 
-        \item Whether the agent should pre-train on existing data (e.g., using offline RL) must be decided by a human.
+        \item Decide whether the agent should pre-train on existing data (e.g., using offline RL) must be decided by a human.
     \end{itemize}
 \noindent
-\emph{2: During agent learning}
+\emph{2: During Agent Learning}
     \begin{itemize}
         \item A human could decide to disallow the agent from selecting invalid actions or actions that are known to always be suboptimal.
         \item A human could decide that an existing controller could bias the agent's action selection to learn faster.
@@ -186,20 +183,20 @@ First, we argue that RL is a human-in-the-loop paradigm, and identify four stage
 \noindent
 \emph{3: Model Evaluation}
     \begin{itemize}
-        \item The trained agent is tested by developers and subject matter experts
-        \item A human will need to understand and evaluate the learned policies for sensible micro- and macro-behavior
-        \item Explanations need to scale to be able to make large and complex models understandable
+        \item The trained agent is tested by developers and subject matter experts.
+        \item A human will need to understand and evaluate the learned policies for sensible micro- and macro-behavior.
+        \item Explanations need to scale to be able to make large and complex models understandable.
     \end{itemize}
-\emph{4: Deployment of learned Agent}
+\emph{4: Deployment of Learned Agent}
     \begin{itemize}
-        \item If the agent is learning in a simulation or in a controlled environment, a subject matter expert must decide if the learned policy is ``good enough'' to deploy, if more training is needed, or if the problem definition needs to be changed.
-        \item A human will typically need to argue why the agent is safe enough, or should be trusted enough, to be deployed in the real world.
+        \item If the agent is learning in a simulation or in a controlled environment, a subject matter expert must decide if the learned policy is ``good enough'' to deploy, if more training is needed, or if the problem definition needs to be changed..
+        \item A human will typically need to argue why the agent is safe enough, or should be trusted enough, to be deployed in the real world..
         \item A human will need to determine if the agent should continually learn, if its policy should be frozen, or if it should retrain if the environment has changed ``enough.'' 
     \end{itemize}
 
-Second, in each of these four stages, we argue that explainability is a critical (underdeveloped) technology. Before training, explainability can help show the impact of algorithm or hyperparameter selection, how prior knowledge biases the agent, and how pre-training changes the agent's learning process. During training and testing, explainability can show the impact biasing via an existing controller or human advice, how learning is progressing, or how the current policy functions. In the deployment phase after training, explainability can help explain the final policy, improve trust, help the person evaluate safety, and understand the policy's stability.
+Second, in each of these four stages, we argue that explainability is a critical and underdeveloped technology. Before training, explainability can help show the impact of algorithm or hyperparameter selection, how prior knowledge biases the agent, and how pre-training changes the agent's learning process. During training and testing, explainability can show the impact biasing via an existing controller or human advice, how learning is progressing, or how the current policy functions. In the deployment phase after training, explainability can help explain the final policy, improve trust, help the person evaluate safety, and understand the policy's stability.
 
-Part of this article can be considered as a position paper. We want to convince the reader that ignoring humans and treating RL as a fundamentally autonomous learning paradigm is shortsighted --- we will highlight where and how explainability can play a critical role is this human-agent collaboration. But this article can also be considered a survey. While discussing existing literature on explainability in RL, we will call out three types of challenges. Solved challenges are those where current explainability techniques can be used to help humans interact with learning agent. Short-term challenges are where we could easily adapt or extend existing explainability work to assist humans. Long-term challenges are those where significant research is required before a breakthrough can be achieved. The third generation of long-term challenges challenges are discussed extensively in section \ref{sec:ThirdGeneration}. The goal in this article is therefore both to try to shift the discussion about RL in general with respect to human subject experts, machine learning experts, or lay people, and also to provide an entry point into this exciting area of contemporary research at the intersection of explainability on RL, with the goal of getting non-experts quickly up to speed on exciting research directions.
+Part of this article can be considered as a position paper. We want to convince the reader that ignoring humans and treating RL as a fundamentally autonomous learning paradigm is shortsighted --- we will highlight where and how explainability can play a critical role is this human-agent collaboration. But this article can also be considered a survey. While discussing existing literature on explainability in RL, we will call out three types of challenges, and frame them as generations of technologies to emphasize future developments and the steps needed to take to achieve the larger goal of HITL RL. Solved challenges are those where current explainability techniques can be used to help humans interact with learning agent, which reflect the current generation of technology. Short-term challenges are where we could easily adapt or extend existing explainability work to assist humans and belong to the second generation. Long-term challenges are those where significant research is required before a breakthrough can be achieved. This third generation of long-term challenges challenges are discussed extensively in section \ref{sec:ThirdGeneration}. The goal in this article is therefore both to try to shift the discussion about RL in general with respect to human subject experts, machine learning experts, or lay people, and also to provide an entry point into this exciting area of contemporary research at the intersection of explainability on RL, with the goal of getting non-experts quickly up to speed on exciting research directions.
 
 
 
@@ -233,7 +230,7 @@ Part of this article can be considered as a position paper. We want to convince 
 %%%Structure
 
 This paper is structured as follows. \MET{TODO}
-After the introduction and motivation, we provide in section \ref{sec:background} a thorough overview on background work for Explainability, Interactive Learning, and review fundamental and current challenges for embodied intelligence. Then, we explore the four stages for the deployment of HITL RL systems and where xAI can be applied in Development, Teaching, Testing and Using, each with specific requirements for the success of human involvement. Finally, we discuss the general challenges observed and how future solutions can be shaped to overcome them. In the conclusion, we outline current problems and goals in the field, and propose further future work.
+After the introduction and motivation, we provide in section \ref{sec:background} a thorough overview on background work for Explainability, Interactive Learning, and review fundamental and current challenges for embodied intelligence. Then, we explore the four stages for the deployment of HITL RL systems and where xAI can be applied in HITL RL Development, Teaching, Evaluation and Deployment, each with specific requirements for the success of human involvement. Finally, we discuss the general challenges observed and how future solutions can be shaped to overcome them. In the conclusion, we outline current problems and goals in the field, and propose further future work.
 
 % ==================
 \section{Background}
@@ -248,7 +245,7 @@ Explainable Artificial Intelligence (XAI) is a framework that helps human users 
     \item Build trust in the human users specifically when safety is a major issue. For example, in AI applications in medicine, the human user cannot trust on the decision made by the AI agent without any explanation. So transparency and accountability are importnat~\cite{Schneeberger:2020:legalAI, Stoeger:2021:MedicalAI}. Hence, XAI ensures high-level of correctness of the model and helps with generalization and avoids confident decisions made on faulty/inappropriate data.  Other applications such as autonomous
 vehicles or robotics in which the
 result could have an impact on safety are an area where trust
-and accountability are pertinent (~\cite{araiza2019safe,wells2021explainable}).
+and accountability are pertinent (~\cite{araiza2019safe, wells:2021:explainable}).
 \item Enables humans to give richer feedback through additional, optional counterfactual examples. Specifically, this way consider how a learning agent can make use of explanations provided by the human as input and ultimately even allows a cooperation between both to teach goals and behavior for fast and robust learning~\cite{Karalus:2021:HITL-counterfactuals,PuiuttaVeith:2020:xAIRLSurvey}.   
     \item assisting with debugging
 and bias in Machine Learning. At greater length, the inputs and outputs and
@@ -643,7 +640,7 @@ Opposing to the other steps of the HITL deployment, we do not propose that major
 \subsection{Explainability}
 
 % fast approaches
-Several researchers provide examples of how real-time explanations for different use-cases could look like. \cite{RodriguezEtAl:2021:DeepCovidxAI} provide feature-based explanations for COVID-19 case predictions, while \cite{Kulkarni:2021:EducationAIDashboard} developed a classroom dashboard that gives an overview of students performance with dendograms and text-based explanations. The majority of those rea-ltime explainability systems are data/software-based, while for the area of explanations for robotic systems, there are much fewer examples.
+Several researchers provide examples of how real-time explanations for different use-cases could look like. \cite{RodriguezEtAl:2021:DeepCovidxAI} provide feature-based explanations for COVID-19 case predictions, while \cite{Kulkarni:2021:EducationAIDashboard} developed a classroom dashboard that gives an overview of students performance with dendograms and text-based explanations. The majority of those real-time explainability systems are data/software-based, while for the area of explanations for robotic systems, there are much fewer examples.
 Most autonomous driving-systems provide explanations in form of bounding-boxes and labels for recognized objects, which is a valid option for explaining model perception. 
 The next step is decision explanations. Here, \cite{Ben-YounesEtAl:2022:DrivingBehaviorEx} present a method where object saliency is combined with a textual explanation for an action. For example, the observed traffic light is highlighted, in combination with the textual explanation of a "stop" action. Such an approach is already helpful and quick to evaluate by the end user, but could for example be even further refined when using known symbols and signs instead of text along with regional highlighting 
 
@@ -672,7 +669,7 @@ We first want to discuss some general challenges in HITL RL approaches, and then
 
 We refer back to the section "challenges for reinforcement learning" to emphasize that we consider Reinforcement Learning a challenging problem, which greatly benefits from HITL approaches.
 
-We envision that the depicted HITL RL approaches could in the future enable a human-robot teamup, which greatly increases human's productivity in a human-robot team. \cite{KhatibEtAl:1999:RihEnvironment} stated that the human-in-the-loop contributes experience, domain knowledge and is able to control the correct execution of tasks. The robot on the other hand can increase the human's capabilities in terms of force, speed and precision. Moreover, the robot should reduce human exposure to harmful and hazardous conditions. According to \cite{DeSaintsEtAl:2008:phri}, only trustworthy robots are able to work in such a team. Due to the close working environment and interaction with the human, it is of utmost importance that the robot is reliable and safe.
+We envision that the depicted HITL RL approaches could in the future enable a human-robot team-up, which greatly increases human's productivity in a human-robot team. \cite{KhatibEtAl:1999:RihEnvironment} stated that the human-in-the-loop contributes experience, domain knowledge and is able to control the correct execution of tasks. The robot on the other hand can increase the human's capabilities in terms of force, speed and precision. Moreover, the robot should reduce human exposure to harmful and hazardous conditions. According to \cite{DeSaintsEtAl:2008:phri}, only trustworthy robots are able to work in such a team. Due to the close working environment and interaction with the human, it is of utmost importance that the robot is reliable and safe.
 
 % Teamup requirements
 
