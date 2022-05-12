@@ -254,7 +254,6 @@ year = {2021}
   author={Da Silva, Felipe Leno and Hernandez-Leal, Pablo and Kartal, Bilal and Taylor, Matthew E},
   booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
   volume={34},
-  number={04},
   pages={5792--5799},
   year={2020}
 }
@@ -419,6 +418,19 @@ conceptual framework and psychological mechanisms of human behavior explanation 
   year={2021}
 }
 
+@article{Guo:2022:RLSurveyHumanPriorKnowledge,
+  title={Survey of Reinforcement Learning based on Human Prior Knowledge},
+  author={Guo, Zijing and Yao, Chendie and Feng, Yanghe and Xu, Yue},
+  journal={Journal of Uncertain Systems},
+  volume={15},
+  number={01},
+  pages={2230001},
+  year={2022},
+  publisher={World Scientific},
+  abstract={At present, task planning is mainly solved by rules or operational research methods. The time complexity and space complexity of these methods increase exponentially with the growth of problem size. Thus, it is challenging to solve large-scale problems. Moreover, it is helpless to solve dynamic task planning problems. Reinforcement learning (RL) is often used to solve the dynamic planning problem of continuous decision making. RL agent constantly interacts with the environment to achieve the expected goal. However, the RL method meets challenges when handling the problem with ample state space. More sampling and exploration are needed to update the strategy gradient, and the convergence speed is slow. Humans ensure a quick start of learning by using prior knowledge, which reduces the exploration time of problems. Thus, we review the methods which combine human prior knowledge with RL through temporal node classification of human prior knowledge combined with RL. In this way, agents effectively reduce the sampling and exploration of the environment and eventually get the optimal strategy faster. Finally, we propose the development direction.}
+}
+
+
 @article{GunningAha:2019:DARPA,
    year = {2019},
    author = {Gunning, David and Aha, David W.},
@@ -499,7 +511,6 @@ conceptual framework and psychological mechanisms of human behavior explanation 
   author={Hester, Todd and Vecerik, Matej and Pietquin, Olivier and Lanctot, Marc and Schaul, Tom and Piot, Bilal and Horgan, Dan and Quan, John and Sendonaris, Andrew and Osband, Ian and others},
   booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
   volume={32},
-  number={1},
   year={2018},
   abstract={Using demonstrations in Deep RL using a combination of RL loss and supervised large margin classification loss to imitate the expert actions. However, experiments were done with human demonstrators on Atari games, no robotics domain considered}
 }
@@ -671,6 +682,18 @@ conceptual framework and psychological mechanisms of human behavior explanation 
 }
 
 %%% III %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{ibarz2021train,
+  title={How to train your robot with deep reinforcement learning: lessons we have learned},
+  author={Ibarz, Julian and Tan, Jie and Finn, Chelsea and Kalakrishnan, Mrinal and Pastor, Peter and Levine, Sergey},
+  journal={The International Journal of Robotics Research},
+  volume={40},
+  number={4-5},
+  pages={698--721},
+  year={2021},
+  publisher={SAGE Publications Sage UK: London, England}
+}
+
 @article{IsbellEtAl:2006:AdaptiveSocialAgent,
    author = {Isbell, Charles Lee and Kearns, Michael and Singh, Satinder and Shelton, Christian R. and Stone, Peter and Kormann, Dave},
    year = {2006},
@@ -830,6 +853,7 @@ conceptual framework and psychological mechanisms of human behavior explanation 
   publisher={MIT press}
 }
 
+
 @article{Kulkarni:2021:EducationAIDashboard,
   title={Demonstrating REACT: a Real-time Educational AI-powered Classroom Tool},
   author={Kulkarni, Ajay and Gkountouna, Olga},
@@ -864,6 +888,15 @@ conceptual framework and psychological mechanisms of human behavior explanation 
   abstract={Current learning machines have successfully solved hard application problems, reaching high accuracy and displaying seemingly intelligent behavior. Here we apply recent techniques for explaining decisions of state-of-the-art learning machines and analyze various tasks from computer vision and arcade games. This showcases a spectrum of problem-solving behaviors ranging from naive and short-sighted, to well-informed and strategic. We observe that standard performance evaluation metrics can be oblivious to distinguishing these diverse problem solving behaviors. Furthermore, we propose our semi-automated Spectral Relevance Analysis that provides a practically effective way of characterizing and validating the behavior of nonlinear learning machines. This helps to assess whether a learned model indeed delivers reliably for the problem that it was conceived for. Furthermore, our work intends to add a voice of caution to the ongoing excitement about machine intelligence and pledges to evaluate and judge some of these recent successes in a more nuanced manner.}
 }
 
+@inproceedings{le2018hierarchical,
+  title={Hierarchical imitation and reinforcement learning},
+  author={Le, Hoang and Jiang, Nan and Agarwal, Alekh and Dudik, Miroslav and Yue, Yisong and Daum{\'e} III, Hal},
+  booktitle={International conference on machine learning},
+  pages={2917--2926},
+  year={2018},
+  organization={PMLR}
+}
+
 @article{LeeSmithAbbeel:2021:FeedbackPreferenceHITLLearningPEBBLE,
   title={PEBBLE: Feedback-Efficient Interactive Reinforcement Learning via Relabeling Experience and Unsupervised Pre-training},
   author={Lee, Kimin and Smith, Laura and Abbeel, Pieter},
@@ -871,6 +904,27 @@ conceptual framework and psychological mechanisms of human behavior explanation 
   year={2021},
   abstract={Conveying complex objectives to reinforcement learning (RL) agents can often be difficult, involving meticulous design of reward functions that are sufficiently informative yet easy enough to provide. Human-in-the-loop RL methods allow practitioners to instead interactively teach agents through tailored feedback; however, such approaches have been challenging to scale since human feedback is very expensive. In this work, we aim to make this process more sample- and feedback-efficient. We present an off-policy, interactive RL algorithm that capitalizes on the strengths of both feedback and off-policy learning. Specifically, we learn a reward model by actively querying a teacher's preferences between two clips of behavior and use it to train an agent. To enable off-policy learning, we relabel all the agent's past experience when its reward model changes. We additionally show that pre-training our agents with unsupervised exploration substantially increases the mileage of its queries. We demonstrate that our approach is capable of learning tasks of higher complexity than previously considered by human-in-the-loop methods, including a variety of locomotion and robotic manipulation skills. We also show that our method is able to utilize real-time human feedback to effectively prevent reward exploitation and learn new behaviors that are difficult to specify with standard reward functions.}
 }
+
+@article{Li:2017:DRLSurvey,
+  title={Deep reinforcement learning: An overview},
+  author={Li, Yuxi},
+  journal={arXiv preprint arXiv:1701.07274},
+  year={2017},
+  abstract = {We give an overview of recent exciting achievements of deep reinforcement learn- ing (RL). We discuss six core elements, six important mechanisms, and twelve applications. We start with background of machine learning, deep learning and reinforcement learning. Next we discuss core RL elements, including value func- tion, in particular, Deep Q-Network (DQN), policy, reward, model and planning, exploration, and knowledge. After that, we discuss important mechanisms for RL, including attention and memory, unsupervised learning, transfer learning, multi- agent RL, hierarchical RL, and learning to learn. Then we discuss various appli- cations of RL, including games, in particular, AlphaGo, robotics, natural language processing, including dialogue systems, machine translation, and text generation, computer vision, business management, finance, healthcare, education, Industry 4.0, smart grid, intelligent transportation systems, and computer systems. We mention topics not reviewed yet, and list a collection of RL resources. After presenting a brief summary, we close with discussions.}
+}
+
+@article{Li:2019:HumanCenteredRLSurvey,
+  title={Human-centered reinforcement learning: A survey},
+  author={Li, Guangliang and Gomez, Randy and Nakamura, Keisuke and He, Bo},
+  journal={IEEE Transactions on Human-Machine Systems},
+  volume={49},
+  number={4},
+  pages={337--349},
+  year={2019},
+  publisher={IEEE},
+  abstract={Human-centered reinforcement learning (RL), in which an agent learns how to perform a task from evaluative feed- back delivered by a human observer, has become more and more popular in recent years. The advantage of being able to learn from human feedback for a RL agent has led to increasing applicability to real-life problems. This paper describes the state-of-the-art human- centered RL algorithms and aims to become a starting point for researchers who are initiating their endeavors in human-centered RL. Moreover, the objective of this paper is to present a compre- hensive survey of the recent breakthroughs in this field and provide references to the most interesting and successful works. After start- ing with an introduction of the concepts of RL from environmental reward, this paper discusses the origins of human-centered RL and its difference from traditional RL. Then we describe different in- terpretations of human evaluative feedback, which have produced many human-centered RL algorithms in the past decade. In ad- dition, we describe research on agents learning from both human evaluative feedback and environmental rewards as well as on im- proving the efficiency of human-centered RL. Finally, we conclude with an overview of application areas and a discussion of future work and open questions.}
+}
+
 
 @inproceedings{LiangEtAl:2017:HITLReinforcementLearn,
   author = {Liang, Huanghuang and Yang, Lu and Cheng, Hong and Tu, Wenzhe and Xu, Mengjie},
@@ -990,6 +1044,16 @@ conceptual framework and psychological mechanisms of human behavior explanation 
   author={Marletto, C},
   year={2021},
   publisher={Vintage Books: New York, NY, USA}
+}
+
+@misc{MatthewsonPilarski:2022:DesigningAndEvaluatingHCIML,
+      title={A Brief Guide to Designing and Evaluating Human-Centered Interactive Machine Learning}, 
+      author={Kory W. Mathewson and Patrick M. Pilarski},
+      year={2022},
+      eprint={2204.09622},
+      archivePrefix={arXiv},
+      primaryClass={cs.HC},
+      abstract = {Interactive machine learning (IML) is a field of research that explores how to leverage both human and computational abilities in decision making systems. IML represents a collaboration between multiple complementary human and machine intelligent systems working as a team, each with their own unique abilities and limitations. This teamwork might mean that both systems take actions at the same time, or in sequence. Two major open research questions in the field of IML are: "How should we design systems that can learn to make better decisions over time with human interaction?" and "How should we evaluate the design and deployment of such systems?" A lack of appropriate consideration for the humans involved can lead to problematic system behaviour, and issues of fairness, accountability, and transparency. Thus, our goal with this work is to present a human-centred guide to designing and evaluating IML systems while mitigating risks. This guide is intended to be used by machine learning practitioners who are responsible for the health, safety, and well-being of interacting humans. An obligation of responsibility for public interaction means acting with integrity, honesty, fairness, and abiding by applicable legal statutes. With these values and principles in mind, we as a machine learning research community can better achieve goals of augmenting human skills and abilities. This practical guide therefore aims to support many of the responsible decisions necessary throughout the iterative design, development, and dissemination of IML systems. }
 }
 
 @article{Mehrabi:2021:SurveyBiasFairness,
@@ -1741,7 +1805,6 @@ abstract = {In this work a new method to evolutionary robotics is proposed, it c
   author={Hasanbeig, Mohammadhosein and Jeppu, Natasha Yogananda and Abate, Alessandro and Melham, Tom and Kroening, Daniel},
   booktitle={The Thirty-Fifth $\{$AAAI$\}$ Conference on Artificial Intelligence,$\{$AAAI$\}$},
   volume={2},
-  number={9},
   pages={36},
   year={2021}
 }
@@ -1772,7 +1835,6 @@ abstract = {In this work a new method to evolutionary robotics is proposed, it c
   author={Lyu, Daoming and Yang, Fangkai and Liu, Bo and Gustafson, Steven},
   booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
   volume={33},
-  number={01},
   pages={2970--2977},
   year={2019}
 }
@@ -1798,7 +1860,6 @@ abstract = {In this work a new method to evolutionary robotics is proposed, it c
   author={Zhu, Guangxiang and Wang, Jianhao and Ren, Zhizhou and Lin, Zichuan and Zhang, Chongjie},
   booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
   volume={34},
-  number={04},
   pages={6989--6998},
   year={2020}
 }
@@ -1881,7 +1942,6 @@ abstract = {In this work a new method to evolutionary robotics is proposed, it c
   author={Topin, Nicholay and Milani, Stephanie and Fang, Fei and Veloso, Manuela},
   booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
   volume={35},
-  number={11},
   pages={9923--9931},
   year={2021}
 }
