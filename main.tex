@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 2022-01-22 ah
+% 2022-01-22 ah - last revision 2022-05-29 15:15 CET ah
 \documentclass[twoside,11pt]{article}
 % Any additional packages needed should be included after jmlr2e.
 % Note that jmlr2e.sty includes epsfig, amssymb, natbib and graphicx,
@@ -71,12 +71,6 @@ x/22}{X/22}{20-212}{Retzlaff, Saranti, Angerschmid, Mousavi, Das, Wayllace, Afsh
 \addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
 and DAI Lab, TU Berlin, Germany\\
 \AND
-\name Anna Saranti \email anna.saranti@human-centered.ai \\
-\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
-\AND
-\name Alessa Angerschmid \email alessa.angerschmid@human-centered.ai \\
-\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
-\AND
 \name Payam Mousavi \email payam.mousavi@amii.ca \\
 \addr Alberta Machine Intelligence Institute\\
 \AND
@@ -86,6 +80,12 @@ University of Alberta, Canada
 \AND
 \name Christabel Wayllace\email wayllace@ualberta.ca \\
 \addr Department of Computing Science \\ University of Alberta, Canada\\
+\AND
+\name Anna Saranti \email anna.saranti@human-centered.ai \\
+\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
+\AND
+\name Alessa Angerschmid \email alessa.angerschmid@human-centered.ai \\
+\addr Human-Centered AI Lab, University of Natural Resources and Life Sciences Vienna, Austria\\
 \AND
 \name Mohammad Afshari\email mafshari@ualberta.ca \\
 \addr Department of Computing Science \\ University of Alberta, Canada\\
@@ -109,32 +109,23 @@ University of Alberta, Canada
 
 \maketitle
 
-
 \newpage
 
 \begin{abstract}%
-Artificial intelligence in general, and reinforcement learning (RL) in particular, holds the promise of agents learning autonomously to accomplish difficult task with superhuman performance. However, even when an agent is going to eventually perform its task autonomously, we argue that RL is fundamentally a human-in-the-loop paradigm. For instance, an RL agent learns to act in a Markov decision process (MDP), but it is a \emph{human} who both sets an agent to act in this setting and specifies the MDP. Without a human, the agent would have no concept of what a reward is or how to define it! 
+Artificial intelligence (AI) in general, and reinforcement learning (RL) in particular, holds the promise of agents learning autonomously to accomplish difficult task with superhuman performance. However, even when an agent is going to eventually perform its task autonomously, we argue that RL is fundamentally a human-in-the-loop paradigm. For instance, an RL agent learns to act in a Markov decision process (MDP), but it is a \emph{human} who both sets an agent to act in this setting and specifies the MDP. Without a human, the agent would have \textit{no concept} of what a reward is or how to define it.  
 
 This article argues that existing work in the literature has not adequately acknowledged this human-centrality as a key component to successful RL. Moreover, we show how significant improvements to existing explainability techniques are required to fully invest humans, whether lay people, subject matter experts, or machine learning experts, with the ability required to drive this human-agent interaction for Human-In-The-Loop (HITL) RL.
 
+To subsume the central insights from this article, Table \ref{table:Explanations_table} gives an overview of the different phases for the agent deployment, with their respective requirements, aspects of human involvement, explanation types and new challenges. 
+
 Our expectation is that readers of this article will understand (and ideally agree with) our argument that RL is fundamentally a human-agent interactive process. Furthermore, they will quickly understand what current state of the art explainability methods can be used in HITL RL, be able to identify low hanging fruit on explainability research in RL, and appreciate longer-term research goals required to bring this field to fruition. We propose the vision of a human-robot teamup that allows both humans and robots to realise their full potential and play to their respective strengths.
-
-To subsume the central insights from this article, figure \ref{fig:Explanations_table} gives an overview of the different phases for the agent deployment, with their respective requirements, aspects of human involvement, explanation types and new challenges. 
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{img/Explanations_table.png}
-    \caption{Overview of the different explanations contexts in the four different phases.}
-    \label{fig:Explanations_table}
-\end{figure}
-
 
 
 \end{abstract}
 
 
 \begin{keywords}
-Reinforcement Learning, Human-in-the-loop, Explainable AI, Embodied Intelligence, Cyber-physical Systems
+Reinforcement Learning, Human-in-the-loop, Explainable AI, Embodied Intelligence, Explainability
 \end{keywords}
 
 
@@ -213,11 +204,80 @@ Second, in each of these four stages, we argue that explainability is a critical
 
 Part of this article can be considered as a position paper. We want to convince the reader that ignoring humans and treating RL as a fundamentally autonomous learning paradigm is shortsighted --- we will highlight where and how explainability can play a critical role is this human-agent collaboration. 
 
-But this article can also be considered a survey. While discussing existing literature on explainability in RL, we will call out three types of challenges, and frame them as generations of technologies to emphasize future developments and the steps needed to take to achieve the larger goal of HITL RL. Solved challenges are those where current explainability techniques can be used to help humans interact with learning agent, which reflect the current generation of technology. Short-term challenges are where we could easily adapt or extend existing explainability work to assist humans and belong to the second generation. Long-term challenges are those where significant research is required before a breakthrough can be achieved. This third generation of long-term challenges challenges are discussed extensively in subsection \ref{sec:ThirdGeneration}.
+But this article can also be considered a survey. While discussing existing literature on explainability in RL, we will call out three types of challenges, and frame them as generations of technologies to emphasize future developments and the steps needed to take to achieve the larger goal of human-in-the-loop (HITL) RL. Solved challenges are those where current explainability techniques can be used to help humans interact with learning agent, which reflect the current generation of technology. Short-term challenges are where we could easily adapt or extend existing explainability work to assist humans and belong to the second generation. Long-term challenges are those where significant research is required before a breakthrough can be achieved. This third generation of long-term challenges challenges are discussed extensively in subsection \ref{sec:ThirdGeneration}.
 
 The goal in this article is therefore both to try to shift the discussion about RL in general with respect to human subject experts, machine learning experts, or lay people, and also to provide an entry point into this exciting area of contemporary research at the intersection of explainability on RL, with the goal of getting non-experts quickly up to speed on exciting research directions.
 
-This paper is structured as follows: After the introduction and motivation, we provide in section \ref{sec:background} a thorough overview on background work for Explainability, Interactive Learning, and review fundamental and current challenges for embodied intelligence. Then, we explore the four stages for the deployment of HITL RL systems and where xAI can be applied in HITL RL Development, Teaching, Evaluation and Deployment, each with specific requirements for the success of human involvement. Finally, we discuss the general challenges observed and how future solutions can be shaped to overcome them. In the conclusion, we outline current problems and goals in the field, and propose further future work.
+The paper is structured as follows: After the introduction and motivation, we provide in section \ref{sec:background} a thorough overview on background work for explainability, Interactive Learning, and review fundamental and current challenges for embodied intelligence. Then, we explore the four stages for the deployment of HITL RL systems and where xAI can be applied in HITL RL Development, Teaching, Evaluation and Deployment, each with specific requirements for the success of human involvement. Finally, we discuss the general challenges observed and how future solutions can be shaped to overcome them. In the conclusion, we outline current problems and goals in the field, and propose further future work.
+
+	\begin{table*}[!htbp]
+	\tiny
+	\resizebox{1\linewidth}{!}{
+		\begin{tabular}{|c||l|l|l|l|}
+			\cline{1-5}
+			\multicolumn{1}{|c||}{ }  & \multicolumn{1}{c|}{ } & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{ } & \multicolumn{1}{c|}{ }\\
+			\multicolumn{1}{|c||}{\textsc{Phase}}  & \multicolumn{1}{c|}{\textsc{Explanation Requirements}} & \multicolumn{1}{c|}{\textsc{Human Involvement }} & \multicolumn{1}{c|}{\textsc{Explainability} } & \multicolumn{1}{c|}{\textsc{Challenges}}\\
+			\multicolumn{1}{|c||}{ }  & \multicolumn{1}{c|}{ } & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{ } & \multicolumn{1}{c|}{ }\\
+			\cline{1-5}
+			\multirow{11}{*}{\rotatebox{90}{\hspace{0em}\textsc{Development}}} 
+			&  &  & & \\
+			& $\cdot$Comparable between different model versions &$\cdot$Define Problem &\textbf{Techniques:} &	$\cdot$Creating Interactive, Thorough,\\
+			& $\cdot$Rapidly Computable and&$\cdot$Construct State Space, &$\cdot$Pre-Training&$ $ and Comparable Model\\
+			& $ $ Shallow OR &	$ $ Action Space,  	&	 $\cdot$Human-Readable Model 	&	$ $ Summaries	\\
+			& $\cdot$Exhaustive but Slower &	 $ $ Reward Function 	&	 $\cdot$Policies 	&	$\cdot$Use Compositional and	\\
+			&&	 $\cdot$Model Design 	&	 $\cdot$Causal Models	&$ $ Representational Language	\\
+			&&	 	&	 \textbf{Directionality:}	&$\cdot$Integrate Causal Learning	\\
+			&&	 	&	 $\cdot$Unidirectional (model to user)	& $\cdot$Use Policy Querying	\\
+			&&	 	&	 \textbf{Users:}	&	\\
+			&&	 	&	 $\cdot$RL Experts	&	\\
+			&  &  & & \\
+			\cline{1-5}
+			\multirow{10}{*}{\rotatebox{90}{\hspace{0em}\textsc{Agent}} \rotatebox{90}{\textsc{Learning}}} 
+			&  &  & & \\
+			& $\cdot$Interpretable Inputs &	 $\cdot$Evaluative Feedback 	&	 \textbf{Techniques:} 	&	$\cdot$Start with Imitation Learning and	\\
+			& $\cdot$Interactive&	$\cdot$Action-Advice 	&	 $\cdot$Perception Explanation 	&	$ $ Fine-Tune with Preference-Based 	\\
+			& $\cdot$Support Human as Teacher &	 $\cdot$Human Preference 	&	 $\cdot$Behavior Evaluation 	&	$ $ Learning	\\
+			& $\cdot$Understandable by&	 $\cdot$Demonstrations 	&	\textbf{Directionality:}   	&	$\cdot$Adapt xAI Approaches to HITL\\
+			& $ $ Domain Expert & 	&	 $\cdot$Bidirectional 	&$ $ Context	\\
+			&   & 	&	 \textbf{Users:}	&	$\cdot$Supporting Human as Teacher 	\\
+			&   & 	&	 $\cdot$Domain Experts	&	$ $ with Replanning and Corrections	\\
+			&   & 	&	 $\cdot$RL Experts	&	\\
+			&  &  & & \\
+			\cline{1-5}
+			\multirow{10}{*}{\rotatebox{90}{\hspace{0em}\textsc{Evaluation}}}
+			&  &  & & \\
+			& $\cdot$Explanations of  & $\cdot$Understand and Evaluate	&	 \textbf{Techniques:}	& $\cdot$Ensure Understandability for	\\
+			&  $ $ Learned Behavior & $ $ Learned Policies on Micro	&	 $\cdot$Policy Summarization	&$ $ Subject Expert	\\
+			& $\cdot$Scale to Large Models  & $ $ and Macro-Level	&	 $\cdot$Graph-Based Explanations	&	$\cdot$Thorough and Comparable \\
+			& $\cdot$Comparable to  & 	&	 \textbf{Directionality:}	& $ $ Explanations that Scale with	\\
+			& $ $ Untrained Model  & 	&	 $\cdot$Bidirectional	& $ $ Model Size and Complexity	\\
+			& $\cdot$Understandable by  & 	&	 \textbf{Users:}	& $\cdot$Dashboard for Inspection from 	\\
+			&  $ $  Domain Expert& 	&	 $\cdot$Domain Experts	&$ $ Different Viewpoints/Aspects	\\
+			&  $ $   & 	&	 $\cdot$RL Experts	& 	\\
+			&  &  & & \\
+			\cline{1-5}
+			\multirow{10}{*}{\rotatebox{90}{\hspace{0em}\textsc{Deployment}}}
+			&  &  & & \\
+			&  $\cdot$Rapid Computation and& $\cdot$Deployment and	&\textbf{Techniques:}	&	$\cdot$New Approaches Beyond Image\\
+			&  $ $  Low Cognitive Load& $ $ Usage Decision	&	 $\cdot$Combined Explainability	&$ $ and Driving-Based Explanations	\\
+			&  $\cdot$Understandable by End-User& $\cdot$Interaction with End-User	&	 $ $ Dashboard	&	$\cdot$Simple and Fast Explanations\\
+			&  & 	&	 $\cdot$Intent Communication	& $\cdot$Error and Uncertainty Handling	\\
+			&  & 	&	 $\cdot$Error Handling	& $\cdot$Communication of Agent Intent \\
+			&  & 	&	\textbf{Directionality:}	&$ $ Via Different Modalities	\\
+			&   & 	&	 $\cdot$Bidirectional	&	\\
+			&   & 	&\textbf{Users:}	&	\\
+			&   & 	&	 $\cdot$End-Users	&	\\
+			&  &  & & \\
+			\cline{1-5}
+		\end{tabular}
+	}
+	\caption{Overview of the different explanations contexts in the four different phases. \emph{Explanation Requirements} enumerates desirable properties of explanations at this stage, and \emph{Human Involvement} describes how the human is involved in it. The \emph{Explainability} column lists example techniques and the directionality of explanations, as well as the users of the agent at this stage. The \emph{Third Generation Challenges} finally describes blue-sky propositions we envision for a comprehensive HITL RL experience.}
+	\label{table:Explanations_table}
+\end{table*}
+
+We created  table \ref{table:Explanations_table} with the intention to give the reader a comprehensive overview of the main insights of our paper. It gives a synopsis of the central aspects of this paper, and subsumes the requirements, challenges and human context for the four phases we discuss extensively in the following pages. 
+
+We want to show that RL greatly benefits from being thought of as human-centered process, and that explainability is required to enable this HITL RL approach. We aim to show how current xAI methods can be used to facilitate such HITL approaches, and identify low hanging fruits for further explainability research, ultimately enabling a more productive interaction of humans and RL agents.
 
 % ==================
 \section{Background}
@@ -225,9 +285,9 @@ This paper is structured as follows: After the introduction and motivation, we p
 
 \subsection{Explainability}
 
-Explainable Artificial Intelligence (xAI) is a framework for helping human users understand the process and outputs of machine learning models. As ML models are deployed in a growing number of applications that affect human life (e.g. agriculture, forestry, health), the need for such xAI frameworks is ever more apparent. The xAI approaches are essential for many human-AI collaboration scenarios, where understanding and trusting the outputs of the model is a prerequisite for their use.  
+Explainable Artificial Intelligence (xAI) is a framework for helping human users understand the process and outputs of machine learning models. As ML models are deployed in a growing number of applications that affect human life (e.g. agriculture, forestry, health, ...), the need for such xAI frameworks is ever more apparent. The xAI approaches are essential for many human-AI collaboration scenarios, where understanding and trusting the outputs of the model is a prerequisite for their use.  
 
-The growing research community in the domain of xAI since the inception of the DARPA initiative \citep{GunningAha:2019:DARPA} has since developed a number of very successful xAI methods \citep{ZhouEtAl:2021:QualitySurvey,HolzWoj:2022:XAIOverview}. Explainability in this context is a technical term used to refer to the collection of methods that aim to highlight decision-relevant parts of machine representations and machine models.
+Explainability has grown from the 1990's with researchers aiming to extract rules from neural networks \citep{TickleEtAl:1998:HistoryNN}, towards an progressively expanding, dedicated research community, as seen at the example of the DARPA initiative \citep{GunningAha:2019:DARPA}. The xAI efforts have since led to a number of very successful xAI methods \citep{ZhouEtAl:2021:QualitySurvey,HolzWoj:2022:XAIOverview}. Explainability in this context is a technical term used to refer to the collection of methods that aim to highlight decision-relevant parts of machine representations and machine models.
 
 The following examples show how xAI frameworks and human users can interact:
 \begin{enumerate}
@@ -241,14 +301,14 @@ These examples show the diverse applications for xAI frameworks. However, object
 
 % Moved the section on interpretability here so we could use the same categorization for explainability as well (Payam) - Are we OK with this?
 
-Interpretability can be considered a subset of explainability, and is defined as the methods which passively make the model understandable, whereas explainability actively generates explanations for a model. We refer to \citep{GlanoisEtAl:2021:SurveyInterpretableRL} for a comprehensive survey of interpretable RL, but extend their categorization of interpretability approaches to include explainability models as well. The three major categories are: 1) interpretable/explainable inputs of RL models; 2) interpretable/explainable environment models for RL; and 3) interpretable/explainable decision-making processes of RL. 
+Interpretability can be considered a subset of explainability, and is defined as the methods which passively make the model understandable, whereas explainability actively generates explanations for a model. We refer to \citep{GlanoisEtAl:2021:SurveyInterpretableRL} for a comprehensive survey of interpretable RL, but extend their categorization of interpretability approaches to include explainability models as well. The three major categories are: 1) interpretable/explainable inputs of RL models; 2) interpretable/explainable transition and reward models for RL; and 3) interpretable/explainable decision-making processes of RL. 
 
 The first category focuses on the inputs to the RL model used to make decisions. It not only includes the agent's state, but also other structural information, such as the problem descriptions from human experts \citep{hasanbeig2021deepsynth}, and the relational \citep{martinez2017relational,battaglia2018relational} or hierarchical structure \citep{andreas2017modular,lyu2019sdrl} of the problem. Such information helps humans better understand the decisions made by RL models. 
 %Visualization
 A prominent approach and important building block for explaining complicated inputs is to visualize them as the model perceives them. This is often combined with showing relevance and importance for model decisions, which can help to evaluate whether the model is looking at the right input aspects, but also has its own caveat of possibly misleading the user (as further discussed in \cite{EvansEtAl:2021:ExplainabilityParadox}).
 In the broad approach of saliency maps, important image regions are highlighted. \citet{LiuEtAl:2018:LinearModelUTrees} show an example where continuous "super-pixels" with large feature influence are highlighted. \citet{Bach:2015:LayerWiseRelevancePropagation} develop the technique of ``Layer-Wise Relevance Propagation", that iteratively changes the model inputs to find the relevance of individual (image) parts or features. \\
 
-The second category exploits an interpretable/explainable model of the task or environment, e.g., a transition model \citep{martinez2016learning,zhu2020object} or a preference model \citep{toro2019learning,icarte2018using}. Such environment models help both the RL agent's reasoning about its decision-making and humans' understandings of the decision-making process. \\
+The second category exploits an interpretable/explainable model of the task or environment, e.g., a transition model \citep{martinez2016learning,zhu2020object} or a preference model \citep{toro2019learning,icarte2018using}. Such models help both the RL agent's reasoning about its decision-making and humans' understandings of the decision-making process. \\
 
 The third category is the interpretable/explainable decision-making of RL agents, referring to cases where policies can be learned in a fully understandable manner. Some of the previous work directly learns such interpretable policies in the form of decision trees \citep{likmeta2020combining,silva2020optimization,topin2021iterative}, formulas \citep{hein2018interpretable,hein2019generating}, fuzzy rules \citep{zhang2021kogun,akrour2019towards,hein2017particle}, logic rules \citep{jiang2019neural}, programs \citep{verma2019imitation,sun2019program} and so on. Others, first learn a non-interpretable policy, then transform this policy to an interpretable one through imitation learning or transfer learning \citep{VermaEtAl:2018:ProgrammaticallyInterpretableRL,bastani2018verifiable}.
 
@@ -309,9 +369,9 @@ Lastly, human-advice-based value functions can be combined with agent value func
 The first indicator for the need for human intervention is model performance, since a bad model is more likely to produce bad policies. However, good models can also lead to bad policies as well at deployment scenarios because of the sim-to-real gap. In many cases, human intervention is simulated from pseudo-agents since both the potential benefits and the need to know where the imperfections of the model are can be detected before deployment. The designer of the interactive framework must also take into account that the human interventions might not always be perfect or beneficial; the user might need special training and an informative user interface to effectively improve the RL algorithm. 
 %merged the UI paragraph from the Interactive learning section here
 
-The type of user interface (UI), hardware-delivered or natural interaction,  determines the degree of expertise required and can affect the quality of the feedback \citep{lin:20}. Keyboard keys, mouse clicks with sliders, and game controllers are examples of UIs in hardware-delivered interactions, and experts or knowledgeable trainers generally use these UIs. On the other hand, sound interfaces that use the techniques of audification and sonification \citep{Hermann:2011:Sonification, Saranti:2009:QuantumHarmonicOscSonification,kartoun:10,Scurto:2021:DesigningDeepRLHumanParameterExploration}, cameras to capture facial expressions \citep{arakawa:18}, etc. are examples of UIs for natural interaction that non-expert users prefer. 
+The type of UI, hardware-delivered or natural interaction,  determines the degree of expertise required and can affect the quality of the feedback \citep{lin:20}. Keyboard keys, mouse clicks with sliders, and game controllers are examples of UIs in hardware-delivered interactions, and experts or knowledgeable trainers generally use these UIs. On the other hand, sound interfaces that use the techniques of audification and sonification \citep{Hermann:2011:Sonification, Saranti:2009:QuantumHarmonicOscSonification,kartoun:10,Scurto:2021:DesigningDeepRLHumanParameterExploration}, cameras to capture facial expressions \citep{arakawa:18}, etc. are examples of UIs for natural interaction that non-expert users prefer. 
 
-\subsection{Challenges for Reinforcement Learning and HITL approaches}
+\subsection{Challenges for Reinforcement Learning and HITL approaches} \label{challenges-for-RL}
 
 To conclude the background section, we want to talk about underlying challenges for Reinforcement Learning in general and those more specific to embodied intelligence in order to get a better understanding of fundamental and current challenges in the field.
 
@@ -345,7 +405,9 @@ Deep RL agents, after training has reached a good performance, will generalize b
 %limits of xAI?
 One other aspect is that most of the current xAI methods invented for deep neural networks that also have a practical implementation are not created with RL principles in mind. They are typically created with the intent of uncovering a simpler, interpretable model or to pinpoint the important elements of a potential input, driven by the mathematical principles of neural networks. For example, in the groundbreaking example of the Convolutional Neural Network (CNN) that was used to process the Atari images \citep{Mnih:2013:PlayingAtariDeepRL} a state-of-the-art xAI method, namely Layer-wise Relevance Propagation (LRP) could be used \citep{Bach:2015:LayerWiseRelevancePropagation,Alber:2019:Innvestigate}. However, this would only provide to the user a heatmap about what is positive and what is negatively relevant for the prediction, meaning that it would only characterize (in RL terms) one input state. Those heatmaps are not juxtaposed or combined with the possible actions from that state, or their expected reward as a whole - the human would not know why the RL algorithm decided for the selected next action. To reconstruct the complete strategy of a model, its rules and the underlying purposes of all (or at least the representative) state-action pairs out of those heatmaps, would be a very cumbersome task. 
 
-We argue that the discussed challenges show that generalisable and performant RL is a fundamentally challenging problem, as exemplified by the different obstacles detailed in this section. We claim that many of those challenges can be overcome with the application of HITL approaches. Similarly, \citet{MatthewsonPilarski:2022:DesigningAndEvaluatingHCIML} argue that human-centered thinking for RL approaches is essential for designing and deployment of RL systems, enabled by human-centered approaches like reward shaping and better feedback between agent and human \citep{Li:2019:HumanCenteredRLSurvey}. 
+We argue that the discussed challenges show that generalisable and performant RL is a fundamentally challenging problem, as exemplified by the different obstacles detailed in this section. We claim that many of those challenges can be overcome with the application of HITL approaches. 
+% Similarly, \citet{MatthewsonPilarski:2022:DesigningAndEvaluatingHCIML} argue that human-centered thinking for RL approaches is essential for designing and deployment of RL systems, enabled by human-centered approaches like reward shaping and better feedback between agent and human \citep{Li:2019:HumanCenteredRLSurvey}. While \citet{MatthewsonPilarski:2022:DesigningAndEvaluatingHCIML} take the bird-eye perspective on all machine learning as interactive machine learning and formulate an overall guideline for human-centered design of ML systems, we focus specifically on the deployment process of interactive and HITL RL systems.
+ \citet{MatthewsonPilarski:2022:DesigningAndEvaluatingHCIML} argue that human-centered interactive approaches are essential for designing and deployment of all machine learning systems. While \citet{MatthewsonPilarski:2022:DesigningAndEvaluatingHCIML} take the bird-eye perspective on all machine learning systems as interactive machine learning and formulate an overall guideline for human-centered design of ML systems, we focus specifically on the design, evaluation and deployment of interactive HITL RL systems and associated short-term and long-term challenges.
 
 We furthermore argue that xAI approaches are fundamental for the success of HITL approaches, a sentiment shared by other researchers \citep{heuillet2021explainability,milani2022survey}. We propose that in each of the four deployment phases outlined, xAI is essential. Before training, explainability can help show the impact of algorithm or hyperparameter selection, how prior knowledge biases the agent, and how pre-training changes the agent's learning process. During training and testing, explainability can show the impact biasing via an existing controller or human advice, how learning is progressing, or how the current policy functions. In the deployment phase after training, explainability can help explain the final policy, improve trust, help the person evaluate safety, and understand the policy's stability. 
 
@@ -355,25 +417,25 @@ In the following sections, we want to show where xAI can be applied in the deplo
 \section{Developing RL Models}
 \label{sec:Developing}
 
-The first step of a HITL RL model deployment process is developing the underlying model, along with problem formulation and pre-learning considerations. This entails making the model understandable to the software developers and AI experts, which want detailed insight into their model. 
+The first step of a HITL RL model deployment process is developing the underlying model, along with problem formulation and pre-learning considerations. This entails making the model understandable to the software developers and AI experts, who want detailed insight into their model. 
 % Motivation for XAI consideration in the Development process
-Integrating considerations for explainability into this development process of RL systems is strongly recommendable, since it allows them to start off in the right direction, instead of having to make costly (post-hoc) changes later on in the RL lifecycle. Decisions on the groundwork made now have large implications for the overall RL lifecycle and are likely to be hard to change later on.
+Integrating considerations for explainability into this development process of RL systems is strongly recommended, since it allows the AI experts to start off in the right direction, instead of having to make costly (post-hoc) changes later on in the RL life-cycle. Decisions on the groundwork made now have large implications for the overall RL life-cycle and are likely to be hard to change later on.
 
 % Benefits - solid groundwork, avoid common errors, generate baseline
-At this stage, working with an understandable model can help to ensure the model is based on solid assumptions and comes to consistent, sound conclusions. The numerous error sources pertaining to training data, model initialization, and the initial learning process can be monitored and limited. Ensuring proper model function and architecture at this step also ensures a proper baseline for comparing the trained model against.
+At this stage, working with an understandable model can help to ensure the model is based on solid assumptions and comes to consistent, and sound conclusions. The numerous error sources pertaining to training data, model initialization, and the initial learning process can be monitored and limited. Ensuring proper model function and architecture at this step also ensures a proper baseline for comparing the trained model against.
 
 \subsection{Requirements}
 % considerations
-We propose central considerations for the development stage. Firstly, the generated explanations should be comparable to other versions (ie. not newly ordered graphs, which would be hard to compare), in order to track the progress of development. 
-Then, we identify two approaches for an explainable development process. On the one hand, a broader and more superficial evaluation of general model behavior, which in turn allows for inspecting many different aspects of the model behavior. Here, explanations have to be rapidly computed, to enable a quick feedback loop during training. 
-\citet{XinEtAl:2018:HITLMLFeedbackLoop} explore the implications of a quicker HITL feedback loop. They highlight aspects like introspection, the ability to rapidly analyze and compare the impact of changes, to reuse intermediate results, and an easier end-to-end optimization by quicker feedback.
+We propose primary considerations for the development stage. In the beginning, the generated explanations should be comparable to other versions (i.e., not newly ordered graphs, which would be hard to compare), in order to track the progress of development. 
+Then, we identify two approaches for an explainable development process. First, we identify a broader and more superficial evaluation of general model behavior, which in turn allows for inspecting many different aspects of the model behavior. Here, explanations have to be rapidly computed, to enable a quick feedback loop during training. 
+\citet{XinEtAl:2018:HITLMLFeedbackLoop} explores the implications of a quicker HITL feedback loop. The authors highlight aspects like introspection, the ability to rapidly analyze and compare the impact of changes to reuse intermediate results, and an easier end-to-end optimization by quicker feedback.
 
-On the other hand, deep inspection with a technique like DAGs of model behavior provides a more elaborate view of the model, but requires more time to understand and interpret correctly, and can therefore be used to view fewer model snapshots. Both approaches should complement each other since a thorough assessment of model behavior will require both depth and breadth.
+Second, deep inspection with a technique like DAGs of model behavior which provides a more elaborate view of the model, but requires more time to understand and interpret correctly, and can therefore be used to view fewer model snapshots. Both approaches should complement each other since a thorough assessment of model behavior will require both depth and breadth.
 
 % removed requirements:
-We can also limit some constraints for the xAI methods. Depth-oriented techniques can be more complex and detailed since it is used repeatedly by knowledgeable personnel, which can afford the required cognitive load. In other words, we can move more to the "complexity" side on the performance-complexity spectrum, since we care more about detailed insights than easiest understandability. Also, computational resources are the least constrained, and the scalability of explanations is also not essential since the model is not yet fully trained in this phase.
+We can also limit some constraints for the xAI methods. Depth-oriented techniques can be more complex and detailed since it is used repeatedly by knowledgeable personnel, who can afford the required cognitive load. In other words, we can move more to the "complexity" side on the performance-complexity spectrum, since we care more about detailed insights than easiest understandability. Also, computational resources are the least constrained, and the scalability of explanations is also not essential since the model is not yet fully trained in this phase.
 
-We identify different approaches that can help during this phase of model deployment. First, pre-training can help with the groundwork of intelligent behavior and enable sensible debugging. Secondly, interpretability approaches should be considered at this step, since inherent understandability implemented at this step will also benefit all succeeding phases. Finally, we argue which types of explainability approaches are suitable for this phase.
+We identify different approaches that can help during this phase of model deployment. First, pre-training can help with the groundwork of intelligent behavior and enable sensible debugging. Second, interpretability approaches should be considered at this step, since inherent understandability implemented at this step will also benefit all succeeding phases. Finally, we argue which types of explainability approaches are suitable for this phase.
 
 \subsection{Pre-Training}
 Pre-Training models are beneficial in the RL training workflow since they prepare the groundwork for a more productive Human-Robot interaction. Pre-training for RL benefits HITL in several ways. It helps to 
@@ -413,6 +475,15 @@ An example of this is given by \citet{HayesShah:2017:AutonomousPolicyExplanation
 Finally, approaches in causal learning can help with understanding the underlying model and going beyond interpretability toward explainability.
 An example of such xAI methods is Probabilistic Graphical Models (PGM), which help construct causal models and are often applied to Graph Neural Networks (GNN) \citep{Saranti:2019:LearningCompetencePGMs}. Graph Neural Networks are especially suitable for explainability methods in this stage since they allow easier and more direct visualization of critical components. \citet{Vu:2020:PGMExplainer} for example supports the informed creation of a causal model by identifying essential graph components and then generating PGMs approximating that prediction. This can help identify cause and effect in neural networks and determine cause and effect relations.
 
+\subsection{Further considerations}
+
+
+
+
+%\subsection{Conclusion}
+
+\noindent To \textbf{summarize} the development phase, we refer to table \ref{table:Explanations_table}. The model explanations should be comparable against each other, allowing the user to understand the differences between tested architectures. Explanations should also be either fast to compute but shallow, or with extensive coverage but can then afford to be slower (both to compute and understand). Humans are involved at this step for defining the problem, overall model design as well as specification of state space, action space and reward function and evaluation metrics of the agent. Possible (xAI) techniques for HITL are pre-training as a way to strengthen overall performance, human-readable model policies and causal models for explainability. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Agent Learning}
 \label{sec:AgentLearning}
@@ -433,9 +504,9 @@ The drawbacks of a more shallow introspection into the model is alleviated by th
 We furthermore emphasize that even suboptimal explanations by human teachers are better than none. Current literature focuses on agents using human advice during the learning phase, leveraging humans' \emph{a priori} knowledge. Yet, even though the human decisions could be less accurate, \citet{Zhang:2020:human_out_loop} demonstrate that agents will learn sub-optimal policies if they ignore human advice. 
 
 \subsection{Interactive Learning}
-As stated in Subsection~\ref{IRLBackground}, interactive RL uses human feedback to reduce sample efficiency, sim-to-real transfer problems, generalization, etc. Like any interaction, interactive RL requires a level of agent-human understanding, and one effective way to improve communication involves explaining one's and others' behavior~\citep{de:17}. Therefore, some recent approaches augment interactive RL using explainability techniques. For instance, researchers found that most people training an AI agent assume that their behavior reveals their knowledge \citep{habibian:21}. Hence, some approaches account for this human belief by making the robot behavior interpretable. A learning robot may query the trainer to learn the true reward function. The robot then selects different behaviors and asks people about their preferences. \citet{habibian:21} study the influence of robots' questions on how their trainers perceive them. In their approach, the robot chooses informative questions that simultaneously reveal its learning. Compared to other approaches that do not account for human perception, \citet{habibian:21} found out that people prefer revealing+informative questions since they find these questions easier to answer, more revealing about the robot's learning, and better focused on uncertain aspects of the task. A follow-up study determined that accounting what the human learns from the robot's learning helps decide which features are still unclear to the robot and whether the robot is ready to be deployed. 
+As stated in Subsection~\ref{IRLBackground}, interactive RL uses human feedback to reduce sample efficiency, sim-to-real transfer problems, generalization, etc. Like any interaction, interactive RL requires a level of agent-human understanding, and one effective way to improve communication involves explaining one's and others' behavior~\citep{de:17}. Therefore, some recent approaches augment interactive RL using explainability techniques. For instance, researchers found that most people training an AI agent assume that their behavior reveals their knowledge \citep{habibian:21}. Hence, some approaches account for this human belief by making the robot behavior interpretable. A learning robot may query the trainer to learn the true reward function. The robot then selects different behaviors and asks people about their preferences. \citet{habibian:21} study the influence of robots' questions on how their trainers perceive them. In their approach, the robot chooses informative questions that simultaneously reveal its learning. Compared to other approaches that do not account for human perception, \citet{habibian:21} found out that people prefer revealing and informative questions since they find these questions easier to answer, more revealing about the robot's learning, and better focused on uncertain aspects of the task. A follow-up study determined that accounting what the human learns from the robot's learning helps decide which features are still unclear to the robot and whether the robot is ready to be deployed. 
 
-One way to enhance cooperation between two parties is to understand how a partner behaves to predict future behavior. \citet{fukuchi2017autonomous} proposed a method to explain an agent's future behavior to its trainer while using the same expressions used by the trainer. The agent selects the phrases by assuming that a higher reward means the agent correctly followed the advice. A later work applies the approach to agents that change policies dynamically, i.e., agents under training~\citep{fukuchi2017application}. While explanations usually assume a human explainee, interactive RL may require giving explanations to the agent. One common way of providing feedback is to evaluate agent actions as positive or negative \citep{Knox:2008:TAMER,knox:13,arakawa:18,macglashan2017interactive}. However, this limited feedback could improve if the trainer explains why specific actions are wrong. \citet{guan2020explanation} augment the binary evaluative feedback with visual explanations using saliency maps from humans. In addition to improving the agent's sample efficiency, the approach also reduces the human input required.  Likewise, Karalus \emph{et al.}  enhance evaluative feedback but this time using counterfactual explanations. In case of negative feedback, the humans can communicate to the agent that the feedback would have been positive \emph{if} action $a$ was performed in a different state $s'$. The authors limit the counterfactual feedback only to the negative reward cases where they think they will benefit most. The counterfactual feedback based on both actions and states yielded significant improvements in convergence speed. 
+One way to enhance cooperation between two parties is to understand how a partner behaves to predict future behavior. \citet{fukuchi2017autonomous} proposed a method to explain an agent's future behavior to its trainer while using the same expressions used by the trainer. The agent selects the phrases by assuming that a higher reward means the agent correctly followed the advice. A later work applies the approach to agents that change policies dynamically, i.e., agents under training~\citep{fukuchi2017application}. While explanations usually assume a human explainee, interactive RL may require giving explanations to the agent. One common way of providing feedback is to evaluate agent actions as positive or negative \citep{Knox:2008:TAMER,knox:13,arakawa:18,macglashan2017interactive}. However, this limited feedback could improve if the trainer explains why specific actions are wrong. \citet{guan2020explanation} augment the binary evaluative feedback with visual explanations using saliency maps from humans. In addition to improving the agent's sample efficiency, the approach also reduces the human input required.  Likewise, \citet{Karalus:2021:HITL-counterfactuals} enhance evaluative feedback but this time using counterfactual explanations. In case of negative feedback, the humans can communicate to the agent that the feedback would have been positive \emph{if} action $a$ was performed in a different state $s'$. The authors limit the counterfactual feedback only to the negative reward cases where they think they will benefit most. The counterfactual feedback based on both actions and states yielded significant improvements in convergence speed. 
 
 Another example for the application of counterfactuals is provided by \citep{Pearl:2009:Causality}, which use Dynamical Structural Causal Models (DSCM) as their framework to explicitly model the differences in capabilities of the agent and the human operator as the world states evolve. In this framework, the agent views the human feedback as the intended action and adjusts it (using counterfactual reasoning), if the action is sub-optimal. A trade-off between autonomy and optimality is demonstrated, meaning that fully autonomous agents are likely to be sub-optimal and could only achieve optimality if they receive critical feedback from their human operators. The counterfactual approach proposed by the authors improves on standard methods even when human advice is imperfect.
 
@@ -443,21 +514,20 @@ Another example for the application of counterfactuals is provided by \citep{Pea
 % Different roles for 
 \citet{WuEtAl:2021:HITLMLSurvey} propose that a human can take different roles for interaction with RL agents, such as a Supervisor, Controller, Assistant, Collaborateur or Impactfactor. This encourages it to take into account how the collaboration is framed, and what it entails, for developing an efficient teaching approaches. A learning agent will possibly interact with the designer, trainer, and final user. Therefore, it is important to consider expert to na\"ive collaborators. For instance, tools for visual explanations using typical data visualization techniques such as bars maybe useful for people with some scientific background; however, they add mental load to others~\citep{anderson:20}. 
  
-
 %Genneration 2 ideas
 While giving feedback speeds up agent learning, it can also cause fatigue or boredom to human trainers \citep{akalin:21}, which reduces the advice quality and frequency, resulting in a diminished cumulative reward. Additionally, \citet{macglashan2017interactive} showed that human feedback is dependent on the agent’s current policy.  Transparency might also arise during the training of an agent via human reward, causing the teacher to give incorrect feedback~\citep{knox:13}. These refer to situations where the agent took an unexpected action to satisfy some safety constraints, the human trainer being oblivious of such issues. Hence, explaining the agent’s policy to the trainer will help them to give better and useful feedback and they would be able to reason out about the agent’s unexpected choices. Explanation of the agent’s policy could also enable the human to provide targeted demonstration or advice in the regions where the agent policy is most uncertain or unstable.  Letting the trainer know how much of the advice provided was used compared to environment exploration could help the trainer decide when and where to provide feedback. Moreover, two-way communication where trainers explain the reason for their feedback and agents demonstrate where they applied the advice could undoubtedly provide a better experience or motivation to the trainer while improving the agent’s learning. Further, human trainers tend to give more positive feedback, and the learning agent should be able to inherently accommodate this feedback bias. Making the agent's assumptions transparent to the trainer can improve the overall process.RL agents who learn from human demonstration, imitation, or by querying the trainer preferences can inherit biased human behavior. xAI in that case can also shed light on the biases of the model before deployment.
 
 % sweet spot for ideal interaction
-\citet{WuEtAl:2021:HITLMLSurvey} state that the ideal interaction for HITL would be fluent, performant and reliable. For systems geared at performance, the interaction is usually framed as collaboration, while a focus on reliability favors the role of supervisor for the human. For fluency however, new roles of interaction are proposed and discussed, which would also require new kinds of interfaces.
+\citet{WuEtAl:2021:HITLMLSurvey} state that the ideal interaction for HITL would be fluent, performant and reliable. For systems geared at performance, the interaction is usually framed as collaboration, while a focus on reliability favors the role of supervisor for the human. For fluency however, new roles of interaction are proposed and discussed, which would also require new kinds of interfaces. An agent could furthermore integrate implicit, empathic feedback from a human in the form of gestures, vocalizations and facial expressions as shown by \citet{CuiEtAl:2020:EMPATHICFrameworkHumanFeedback}, which enables a more intuitive interaction and richer feedback from human to learning agent. To leverage such feedback effectively, appropriate user interfaces should be developed and the underlying model should be able to process multi-modal data such as speech, image etc. Another form of implicitly improving feedback is the approach presented by \citet{PengEtAl:2016:AdaptingAgentSpeed}, which makes the agent move slower if it is uncertain, enabling the human to provide feedback where it is most useful with an intuitive cue. Identifying and leveraging useful implicit feedbacks from humans would facilitate agent learning by moving beyond what the human explicitly mentions as a teacher.
 
-Ultimately, we propose that Agent Learning approaches should consider different approaches into their HITL framework, rather than forcing one specific technique. This should allow to better determine the mentioned sweetspot of interaction. \citet{WuEtAl:2021:HITLMLSurvey} show how their HIPPOGym Environment facilitates Human Teacher approaches, which can be in the form of preference-based learning (with positive/negative feedbacK) or imitation learning (giving demonstrations to agent). The successive application of first imitation-learning to build fundamental behavior, followed by preference-based learning to finetune the actions seems most sensible at the given time. This could then be enhanced by enabling querying approaches to get most value out of teaching sessions in different environments.
+Ultimately, we propose that Agent Learning approaches should consider different approaches into their HITL framework, rather than forcing one specific technique. This should allow to better determine the mentioned sweetspot of interaction. \citet{WuEtAl:2021:HITLMLSurvey} show how their HIPPOGym Environment facilitates Human Teacher approaches, which can be in the form of preference-based learning (with positive/negative feedbacK) or imitation learning (giving demonstrations to agent).\\
 
-% % Different roles for 
-% \citet{WuEtAl:2021:HITLMLSurvey} propose that a human can take different roles for interaction with RL agents, such as a Supervisor, Controller, Assistant, Collaborateur or Impactfactor. This encourages it to take into account how the collaboration is framed, and what it entails, for developing an efficient teaching approaches.
-% % sweet spot for ideal interaction
-% \citet{WuEtAl:2021:HITLMLSurvey} state that the ideal interaction for HITL would be fluent, performant and reliable. For systems geared at performance, the interaction is usually framed as collaboration, while a focus on reliability favors the role of supervisor for the human. For fluency however, new roles of interaction are proposed and discussed, which would also require new kinds of interfaces.
+%\subsection{Conclusion}
 
-% Ultimately, we propose that Agent Learning approaches should consider different approaches into their HITL framework, rather than forcing one specific technique. This should allow to better determine the mentioned sweetspot of interaction. \citet{WuEtAl:2021:HITLMLSurvey} show how their HIPPOGym Environment facilitates Human Teacher approaches, which can be in the form of preference-based learning (with positive/negative feedbacK) or imitation learning (giving demonstrations to agent). The successive application of first imitation-learning to build fundamental behavior, followed by preference-based learning to finetune the actions seems most sensible at the given time. This could then be enhanced by enabling querying approaches to get most value out of teaching sessions in different environments.
+% The successive application of first imitation-learning to build fundamental behavior, followed by preference-based learning to finetune the actions seems most sensible at the given time. This could then be enhanced by enabling querying approaches to get most value out of teaching sessions in different environments. 
+
+
+\noindent To \textbf{summarize} the agent learning phase as per table \ref{table:Explanations_table}, explanations should provide the user with interpretable inputs and allow a rich interaction to better understand model behavior. This also requires explanations to be in the language of the domain expert, facilitating a productive "Human as Teacher" interaction. The human is involved at this stage to provide evaluative feedback, give advice and preferences to the agent, and provide demonstrations for complicated tasks. Main explainability techniques are those explaining the agent perceptions and evaluating behavior, for example with counterfactuals. Explainability is interactive at this stage, and RL experts as well as domain experts are involved.
 
 \section{Model Evaluation}
 \label{sec:Evaluation}
@@ -510,6 +580,10 @@ Furthermore, approaches that estimate the model uncertainty in different scenari
 
 We suggest that a combination of the methods described can help significantly by ensuring that the model has only learned desired behavior. The use of graph-based explanations is recommended as complementary to the policy summarization approach, since the summarizing provides a broad overview of model policy, which can then be further inspected by querying specific explanations. The rapidity and intuitiveness of graph-based explanations can then be a major factor to inspect the learned model policies together with domain experts.
 
+%\subsection{Conclusion}
+
+\noindent To \textbf{summarize} the model evaluation phase as per table \ref{table:Explanations_table}, explanations at this stage should be able to scale to large trained models and be comparable to previous versions of the agent. They have to be understandable by the domain experts to allow a exhaustive comparison of the learned model behavior. Humans are involved to understand and evaluate these policies and the resulting behavior at micro-level (sensible individual decision) and on macro-level (cohesive overall behavior). Useful explainability techniques are policy-summarization and graph-based explanations, involving domain experts and RL experts in bidirectional fashon.
+
 \section{Agent Deployment}
 \label{sec:Deployment}
 
@@ -542,7 +616,7 @@ Most autonomous driving-systems provide explanations in form of bounding-boxes a
 The next step is decision explanations. Here, \citet{Ben-YounesEtAl:2022:DrivingBehaviorEx} present a method where object saliency is combined with a textual explanation for an action. For example, the observed traffic light is highlighted, in combination with the textual explanation of a "stop" action. Such an approach is already helpful and quick to evaluate by the end user, but could for example be even further refined when using known symbols and signs instead of text along with regional highlighting 
 
 % Show intent
-A major component for trusting an agent is the predictability of the agents actions. Therefore, we suggest that xAI approaches used in the real world focus on making the agents decision and planning transparent for the user by showing intended actions. Strictly, this does not even fall in the category of "explainability", since actions do not have to be explained, just announced. This strongly simplifies the requirements for such an indication, though of course HCI principles still have to be taken into account to avoid incurring too much mental load. \citet{Caltagarione:2017:DrivingPathGeneration} for example show a predicted trajectory for autonomous driving applications, which could easily be translated to other movement-based domains. 
+A major component for trusting an agent is the predictability of the agents actions. Therefore, we suggest that xAI approaches used in the real-world focus on making the agents decision and planning transparent for the user by showing intended actions. Strictly, this does not even fall in the category of "explainability", since actions do not have to be explained, just announced. This strongly simplifies the requirements for such an indication, though of course HCI principles still have to be taken into account to avoid incurring too much mental load. \citet{Caltagarione:2017:DrivingPathGeneration} for example show a predicted trajectory for autonomous driving applications, which could easily be translated to other movement-based domains. 
 An open challenge is how those predictions can be communicated in other contexts than autonomous cars and with other modalities. Here, items like smartwatches, headphones or just visual indicators could provide familiar and flexible interfaces.
 
 \subsection{Error Handling}
@@ -555,64 +629,81 @@ Such a warning light could be based on uncertainty estimation, and becomes activ
 % Operator corrects errors
 Such an intervention approach is demonstrated by \citep{WuEtAl:2021:HITLDRLAutonomousDriving}. They allow the HITL operator to intervene when the agent makes erroneous decisions, and furthermore allow the model to learn from those interventions. 
 % Startup
-The startup sequence approach could complement this error handling concept. \citet{LiuGuoMahmud:2021:HITLErrorDetectionFramework} for example propose an error detection framework, where the HITL operator is presented with a list of most relevant, explainable features, to detect unusual or nonsensical behavior. This could be evaluated during startup with a quick glance, and provide considerable trust benefits.
+The startup sequence approach could complement this error handling concept. \citet{LiuGuoMahmud:2021:HITLErrorDetectionFramework} for example propose an error detection framework, where the HITL operator is presented with a list of most relevant, explainable features, to detect unusual or nonsensical behavior. This could be evaluated during startup with a quick glance, and provide considerable trust benefits.\\
+
+
+%\subsection{Conclusion}
+
+\noindent To \textbf{summarize} the agent deployment phase as per table \ref{table:Explanations_table}, the main requirement is for explanations to be understandable by the end-user. Additionally, they will be used in the field and therefore should not incur a significant overhead, either with  too much cognitive load or long and costly computation times. The human is involved as end-user deploying the agent, defining the usage context and specific agent task. Explainability can be provided in the form of a combined explainability dashboard, communicating the agent intents and actions and ways of handling uncertainty and errors in bi-directional fashion.
 
 
 \section{Discussion}
 
-We first want to discuss some general challenges in HITL RL approaches, and then treat the presented opportunities and requirements in a three-stage approach. At stage one, we discuss what is possible with current methods. These approaches can be mainly found in the background section. Stage two contains a discussion on how current methods should be adapted to better suit the HITL requirements, which is applied to the sections discussing the four steps required for deployment of HITL systems. The third generation is discussed in the Discussion section and is concerned with future generation approaches that will require new research, methods and technology.
+We first discuss some general challenges in HITL RL approaches, and then treat the presented opportunities and requirements in a three-stage approach. At stage one, we discuss what is possible with current methods. These approaches are mostly discussed in the background section. Stage two contains a discussion on how current methods should be adapted to better suit the HITL requirements, applied to the sections discussing the four steps required for deployment of HITL systems. The third stage approaches focus on those requiring further research to develop new methods and technologies.
 
-\subsection{Challenges}
+\subsection{Open Research Directions}
 
-We refer back to the section "challenges for reinforcement learning" to emphasize that we consider Reinforcement Learning a challenging problem, which greatly benefits from HITL approaches.
+We refer back to section \ref{challenges-for-RL} to emphasize that we consider Reinforcement Learning a challenging problem setting that could greatly benefit from HITL approaches. We further emphasize that there is no one-size-fits-all solution for explainabiliy, and that the requirements for suitable HITL xAI differ between each phase. We do not propose a strict separation of explainability techniques in different phases, but rather recognize the suitability of certain types of xAI for each phase depending on the nature of the human involvement, the aspect of the agent in focus (e.g., model architecture, its decision making process, or its perception of the world), and the task to be tackled, for example, developing the underlying model, adding knowledge to the agent, inspecting the learned behavior and utilizing the agent in a real-world scenario. The types of xAI approaches we recommend are informed by the explanation requirements listed in Table ~\ref{table:Explanations_table} as well as the nature of human involvement, the types of users, and the directionality of the interaction between the human and the agent.
 
-We envision that the depicted HITL RL approaches could in the future enable a human-robot team-up, which greatly increases human's productivity in a human-robot team. \citet{KhatibEtAl:1999:RihEnvironment} stated that the human-in-the-loop contributes experience, domain knowledge and is able to control the correct execution of tasks. The robot on the other hand can increase the human's capabilities in terms of force, speed and precision. Moreover, the robot should reduce human exposure to harmful and hazardous conditions. According to \citep{DeSaintsEtAl:2008:phri}, only trustworthy robots are able to work in such a team. Due to the close working environment and interaction with the human, it is of utmost importance that the robot is reliable and safe.
+We envision that the depicted HITL RL approaches could in the future enable a human-robot team-up, greatly enhancing the productivity of a human-robot team. \citet{KhatibEtAl:1999:RihEnvironment} stated that the human (in the loop) contributes experience, domain knowledge and is able to ensure the correct execution of tasks. The robot on the other hand can increase the human's capabilities in terms of force, speed and precision. Moreover, the robot should reduce human exposure to harmful and hazardous conditions. According to \citep{DeSaintsEtAl:2008:phri}, only trustworthy robots are able to work in such a team. Due to the close working environment and interaction with the human, it is of utmost importance that the robot is reliable and safe.
 
 % Teamup requirements
 
-The human-robot teamup comes with challenges beyond the explainability as described in this paper. When the agent is deployed, the trust requirement is essential, or else the agent will not be used.  Due to the human's anthropomorphic nature, the users estimation of the robots cognitive capabilities will often be overestimated. \citet{DeSaintsEtAl:2008:phri} argue that a user's mental model might result in a fake robot 'dependability', due to certain aspects or the posture of a robot. When interacting with a robot, a human might have a wrong idea of its awareness, since it looks like a living creature. This further strengthens the problem of safety in a human-robot collaboration. The required predictability of the robots actions, testability, explainable policies, but also a performance increase to be actually useful. This performance increase should be measurable and be communicated. It is also recommendable to think about the phases of deployment, where the initial phase for building trust should be differentiated from the performance phase, where the agent is evaluated with regard to its contribution to task performance. 
+The human-robot team-up comes with challenges beyond explainability which was the focus of this work. When the agent is deployed, the trust requirement is essential, or else the agent will not be used. Humans display a tendency to anthropomorphize robots, thereby overestimating their cognitive capabilities. \citet{DeSaintsEtAl:2008:phri} argue that a user's mental model might result in a fake robot \emph{dependability}, due to certain aspects or the posture of a robot. This further exacerbates the problem of safety in human-robot collaboration. The human-robot team-up relies on the predictability of the robot's actions, testability, explainability of the policies, as well as performance increases. The performance increase should be quantifiable and clearly demonstrated. We also advise a separation between the critical deployment phase, where the agent is evaluated based on its task performance and the initial training phase, focused on developing trust.
 
 % xAI takeaways
 
-As for explainability, most work in xAI is based on what researcher deems a good explanation, which is heavily biased \citep{Miller:2019:xAISocialSciencesInsights}. Most models and approaches lack understanding of the human end user, and need to adapt their language and modalities accordingly. This requires to use human-centered development \citep{PuiuttaVeith:2020:xAIRLSurvey}. To ensure that explainability methods orient themselves at the end user and take their respective step (as proposed here) into account, a comprehensive guideline with factors to consider when developing xAI systems could be created to help with this process.
+Most work in xAI is heavily biased by what researchers assumed to be good explanations for a given task or domain \citep{Miller:2019:xAISocialSciencesInsights}, not taking into account the preferences and expertise of the human end-users. To be effective, the models and approaches will need to adapt their language and modalities based on operators' feedback. This requires a more human-centered development \citep{PuiuttaVeith:2020:xAIRLSurvey}.To ensure that explainability methods align with users' expectations, we call for a comprehensive set of guidelines and requirements for developing xAI systems. 
 
-\subsection{Third Generation Challenges}
+\sd{A para about explanations mapped to phases -- TIANPEI}
+%\sd{Small summary of challenges with info from the table -- SRIJITA}
+
+
+\subsection{Challenges}
 \label{sec:ThirdGeneration}
 
-The third generation of approaches consists of blue sky propositions, which are yet out of reach but could lead to large improvements in HITL RL systems.
+As for current challenges, we find that there exist many xAI approaches intended for the development phase, but highlight the lack of interactivity and comparability of the explanations, which hinders thorough introspection. We furthermore find that current explainability approaches often lack the causality and intuitive understandability required for a thorough introspection of a newly developed model.
+
+For the agent learning phase, we find that many approaches support the \emph{Human-as-Teacher} paradigm itself, but identify a lack of explainability approaches which facilitate this interaction. More generally, xAI approaches in this phase need to evolve to support the interactivity in the HITL setting, that are currently underdeveloped.
+
+In the model evaluation phase, we identify a major challenge in the scalability of xAI approaches, that are often suited to smaller models, but fail to provide explainability for large trained models and their learned policies. We also consider the difficulty to identify differences between the untrained and trained model a challenge.
+
+For the final step of agent deployment, there are very few suitable xAI approaches. The application of current approaches is most often hindered by the failure to speak the user`s language, limited available computation, or too much complexity to be usable in a real-time context. Additionally, many HITL RL approaches fail to gain (and deserve) the user`s trust, in addition to failing to communicate uncertainty when warranted.
+
+We therefore picture the following third generation of approaches, which consist of blue-sky propositions that are currently out of reach but could lead to large improvements in HITL RL systems. Refer to table \ref{table:Explanations_table} for an overview of the propositions discussed hereafter.
 
 % Developing - Interactive, thorough and comparable model summaries
 
-We suggest to use compositional and representational language for explainability to enhance the intuitive understandability of models as mentioned by \citet{RoyEtAl:2021:RLRoboticsChallenges}. We furthermore think that causal learning approaches should be adapted and integrated much more deeply into HITL approaches, since they could not only help with generating better explanations, but also better prediction performance as exemplified by \citet{MadumalEtAl:2020:CausalRLCFs}. Thirdly, policy querying approaches like those presented by \citet{HayesShah:2017:AutonomousPolicyExplanation} could be adapted to allow specific inquiries into model structure, and be expanded with counterfactual structures.
-We ultimately envision interactive, thorough and comparable model summaries. Individual components of such a solution can already be found, but the simplicity of a comprehensive solution could greatly benefit such a process.
+We suggest to use compositional and representational language for explainability to enhance the intuitive understandability of models as mentioned by \citet{RoyEtAl:2021:RLRoboticsChallenges}. We furthermore think that causal learning approaches should be adapted and integrated much more deeply into HITL approaches, since in addition to generating better explanations, they could also yield improved prediction performance as exemplified by \citet{MadumalEtAl:2020:CausalRLCFs}. Thirdly, policy querying approaches like those presented by \citet{HayesShah:2017:AutonomousPolicyExplanation} could be adapted to allow specific inquiries into model structure, and be expanded with counterfactual structures.
+We ultimately envision interactive, thorough, and comparable model summaries. Individual components of such a solution can already be found, but the simplicity of a comprehensive solution could greatly benefit such a process.
 
 
 % Teaching - Efficient training in the field, with replanning and corrections
 
-For the agent learning step, the various approaches enumerated in the first generation should be adapted further for RL/HITL contexts. An important adaption is also the provision of a suite of tools to facilitate using different approaches and consequently find the individual sweet-spot mix of different approaches. Adapting the tools to work in a succession that builds fundamental behavior with imitation learning, followed by fine-tuning actions by preference-based learning finally identifying and solving weak spots with querying approaches is only one possible combination.
-We propose the goal of a solution that allows efficient HITL training in the field and with subject matter experts, enabling users to rapidly bootstrap agent behavior and support this process further with replanning and corrections. A combination of such approaches could be very efficient and fast in bringing up robust agents suited for real-world applications.
+For the agent learning step, the various approaches enumerated in the first generation should be adapted further for HITL and RL contexts. An important adaptation is the development of a suite of tools to facilitate the systematic deployment and comparison of the different approaches to discover sweet-spot mixes. An example of an effective combination could be to build fundamental behavior via imitation learning, followed by fine-turning actions by preference-based learning and finally identifying and solving weak spots using querying approaches. We propose that we should strive for a solution that allows efficient HITL training in the field along with subject matter experts, enabling users to rapidly bootstrap agent behavior and support this process further with replanning and corrections. A combination of such approaches could be very efficient and fast in bringing up robust agents suited for real-world applications.
 
 % Testing - Thorough model decision explanations, with detailed diffs
 
-We highlighted that many explainability approaches which suffice in the developing and learning phase need adaptation to the testing stage due to model size and complexity. Approaches like code block summarization as provided by \citet{VermaEtAl:2018:ProgrammaticallyInterpretableRL} could be extended by focusing only on relevant parts of the explanation as illustrated by \citet{Vu:2020:PGMExplainer}. Furthermore, expert-readability needs to be ensured to allow subject matter experts to help with the testing and evaluating whether the learned policies are sensible.
-We recommend focusing on a tool suite that integrates different tools which help scrutinize a model from many different viewpoints. On a underlying matter, we propose that thorough model decision explanations are essential for this process. Furthermore, the focus should be on providing explanations in such a way that they are understandable to the subject matter expert, allowing to not only debug superficial model behavior, but also check the learned routines for semantically sensible behavior. This can not be done by the software developers themselves, and affords explanations in a user-specific language.
+We highlighted that many explainability approaches that suffice in the development and learning phase need adaptation to the testing stage due to model size and complexity. Approaches like code block summarization as provided by \citet{VermaEtAl:2018:ProgrammaticallyInterpretableRL} could be extended by focusing only on relevant parts of the explanations as illustrated by \citet{Vu:2020:PGMExplainer}. Furthermore, expert-readability needs to be ensured to allow subject matter experts to help with the testing and evaluating whether the learned policies are sensible.
+
+We recommend integrating various tools to help evaluate and scrutinize a model from many different viewpoints. We propose that thorough model decision explanations are essential for this process. Furthermore, the focus should be on providing explanations in such a way that they are understandable to the subject matter experts, allowing to not only debug superficial model behavior, but also check the learned routines for semantically sensible behavior. This cannot be done by the software developers alone, if it is to generate explanations in a user-specific language.
 
 % Using - simple and fast highlight-symbol explanations, explaining abstract actions via different modalities, motor warning light and startup sequence
 
-With regard to explainability in the deployment of HITL approaches, we propose that the currently available approaches look beyond the scope of autonomous driving and consider use cases such as explaining textual computations (as seen in credit or policy computations). Also, modalities beside graphic dashboards should be considered to ensure that the full potential of HITL approaches is reached. Auditory and tactic perspectives should be explored, while visual perspectives should be explored also in other form-factors such as smartwatches, LED indicators and image projections.
-For one, we emphasize the need for simple and fast explanations, very much unlike the most common approaches seen today. We furthermore recommend to think about explaining agent actions via different modalities, such as visual indicators, but also haptic or auditory signals, aspects which are largely unexplored as of now. Finally, we envision a suite of tools that allows active warning lights when the agent encounters difficult situations, allowing the user to trust the agent when it is within its generalization capabilities, and communicate it if not. Ultimately, a startup-sequence with different checks would allow the user to ensure that the agent is properly initialized and help greatly with building trust.
+With regard to explainability in the deployment of HITL approaches, we propose that the currently available approaches look beyond the scope of autonomous driving and consider use cases such as explaining textual computations (as seen in credit or policy computations). Also, modalities beyond graphic dashboards should be considered to ensure that the full potential of HITL approaches is reached. Auditory and tactic perspectives should be explored, while visual perspectives should be explored also in different form-factors such as smartwatches, LED indicators and image projections.
+We emphasize the need for simple and fast explanations, very much unlike current approaches. We furthermore recommend to consider explaining agent actions via different modalities, such as visual indicators, but also haptic or auditory signals, aspects which are largely unexplored as of now. Finally, we envision a suite of tools equipped with active warning lights that indicate when the agent encounters difficult situations, allowing the user to trust the agent when it is within its generalization capabilities, and inform the user if that is not the case. Ultimately, a startup-sequence with different checks would allow the user to ensure that the agent is properly initialized and trustworthy.
 
 \section{Conclusion and Future Outlook}
 
-In summary, we emphasise that reinforcement learning is a fundamentally difficult problem for machine learning. Therefore, in the future, it can also benefit greatly from the advantages of a human-in-the-loop. A human expert can contribute conceptual understanding and often many years of experience to the task at hand, thus contributing not only to robustness but also to explainability \citep{Holzinger:2021:TrustAI}. Numerous approaches have confirmed that RL benefits from human-centred approaches \citep{MatthewsonPilarski:2022:DesigningAndEvaluatingHCIML,Li:2019:HumanCenteredRLSurvey}.
+In summary, we emphasise that RL is a fundamentally difficult problem setting and could benefit greatly from human-in-the-loop interactions. A human expert can contribute conceptual understanding gained through many years of experience to the task at hand, thereby significantly improving robustness as well as explainability \citep{Holzinger:2021:TrustAI}. Numerous approaches have demonstrated that RL benefits from human-centred approaches \citep{MatthewsonPilarski:2022:DesigningAndEvaluatingHCIML,Li:2019:HumanCenteredRLSurvey}.
 
-In addition, we further argue that in turn RL approaches, HITL in particular, benefit greatly from xAI approaches. These are, after all, fundamentally human approaches, which in turn ensure successful interaction, acceptance, trust however also conceptual knowledge about the agents' limitations \citep{heuillet2021explainability,milani2022survey}.
+In addition, we further argue that HITL RL in particular, benefit greatly from xAI approaches. These are, after all, fundamentally human approaches, which in turn ensure successful interactions, acceptance, and trust as well as conceptual knowledge about the agents' limitations \citep{heuillet2021explainability,milani2022survey}.
 
-Specifically, we identify the following phases for deploying HITL RL solutions: 1) RL model development, 2) agent learning, 3) model evaluation, and 4) agent deployment. In our work, we discuss how xAI can support each of these phases and what needs to be considered for successful deployment. Thus, the HITL combination also increases productivity and enables human-robot collaboration.
+Specifically, we identify the following phases for deploying HITL RL solutions: 1) RL model development, 2) agent learning, 3) model evaluation, and 4) agent deployment. In our work, we discuss how xAI can support each of these phases and what are some considerations for successful deployment. Thus, the HITL combination also increases productivity and enables human-robot collaboration.
 
 Ultimately, we argue that combining RL and HITL with xAI approaches should be a main focus to increase productivity in real-world applications of RL, for example in agriculture or forestry \citep{Holzinger:2022:DigitalTrans}, and discuss different blue-sky approaches to current xAI methods. In the deployment phase, interactive, thorough and coherent model summaries can enable an agile and transparent workflow. During the agent's interactive learning, xAI approaches can enable more efficient training in the field through interactive replanning and corrections. In the testing phase, comprehensive explanations of model decisions can provide detailed insights into the trained model and lead to informed decisions about whether to proceed with the deployment or start another development cycle. In the deployment phase, simple and quick explanations of actions and different explanations for error handling could significantly increase user confidence in the agent and lead to more efficient collaboration.
 
-Last but not least, we propose a vision of an interactive human-robot teamup that enables new use cases for RL applications and allows both humans and robots to realise their full potential and respective strengths. Such a teamup requires strong interactive collaboration and trust between both parties, which can only be achieved through comprehensive explainability and deep and intuitive understanding of the mental model generated by the agent.
+Last but not least, we propose a vision of an interactive human-robot team-up that enables new use cases for RL applications and allows both humans and robots to realise their full potential and respective strengths. Such a team-up requires strong interactive collaboration and trust between both parties, that can only be achieved through comprehensive explainability and deep and intuitive understanding of the mental model generated by the agent.
 
 
 \begin{comment}
