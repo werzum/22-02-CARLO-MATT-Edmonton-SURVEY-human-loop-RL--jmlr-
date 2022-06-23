@@ -447,6 +447,8 @@
   doi={10.23919/MIPRO.2018.8400040}
 }
 
+@article{Dragan:2015:LegibleRobotMotion, author = "Anca D. Dragan", title = "{Legible Robot Motion Planning}", year = "2015", month = "7", url = "https://kilthub.cmu.edu/articles/thesis/Legible_Robot_Motion_Planning/6720419", doi = "10.1184/R1/6720419.v1" }
+
 %%% EEE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 @inproceedings{EderHarperLeonards:2014:HITLRoboticsSafetyAssurance,
@@ -503,6 +505,18 @@
   year={2018},
   abstract = {Intelligent creatures can explore their environments and learn useful skills without supervision. In this paper, we propose DIAYN ('Diversity is All You Need'), a method for learning useful skills without a reward function. Our proposed method learns skills by maximizing an information theoretic objective using a maximum entropy policy. On a variety of simulated robotic tasks, we show that this simple objective results in the unsupervised emergence of diverse skills, such as walking and jumping. In a number of reinforcement learning benchmark environments, our method is able to learn a skill that solves the benchmark task despite never receiving the true task reward. We show how pretrained skills can provide a good parameter initialization for downstream tasks, and can be composed hierarchically to solve complex, sparse reward tasks. Our results suggest that unsupervised discovery of skills can serve as an effective pretraining mechanism for overcoming challenges of exploration and data efficiency in reinforcement learning.}
 }
+
+@inproceedings{NEURIPS2019_5c48ff18,
+ author = {Eysenbach, Ben and Salakhutdinov, Russ R and Levine, Sergey},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc and E. Fox and R. Garnett},
+ publisher = {Curran Associates, Inc.},
+ title = {Search on the Replay Buffer: Bridging Planning and Reinforcement Learning},
+ url = {https://proceedings.neurips.cc/paper/2019/file/5c48ff18e0a47baaf81d8b8ea51eec92-Paper.pdf},
+ volume = {32},
+ year = {2019}
+}
+
 
 %%% FFF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1372,6 +1386,19 @@
   abstract={In this paper we introduce and evaluate a distal explanation model for model-free reinforcement learning agents that can generate explanations for `why' and `why not' questions. Our starting point is the observation that causal models can generate opportunity chains that take the form of `A enables B and B causes C'. Using insights from an analysis of 240 explanations generated in a human-agent experiment, we define a distal explanation model that can analyse counterfactuals and opportunity chains using decision trees and causal models. A recurrent neural network is employed to learn opportunity chains, and decision trees are used to improve the accuracy of task prediction and the generated counterfactuals. We computationally evaluate the model in 6 reinforcement learning benchmarks using different reinforcement learning algorithms. From a study with 90 human participants, we show that our distal explanation model results in improved outcomes over three scenarios compared with two baseline explanation models.}
 }
 
+@inproceedings{NEURIPS2018_df0aab05,
+ author = {Marom, Ofir and Rosman, Benjamin},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {S. Bengio and H. Wallach and H. Larochelle and K. Grauman and N. Cesa-Bianchi and R. Garnett},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {Zero-Shot Transfer with Deictic Object-Oriented Representation in Reinforcement Learning},
+ url = {https://proceedings.neurips.cc/paper/2018/file/df0aab058ce179e4f7ab135ed4e641a9-Paper.pdf},
+ volume = {31},
+ year = {2018}
+}
+
+
 % there is no doi for the following paper
 @inproceedings{MandelEtAl:2017ActionsInHITL,
   title={Where to Add Actions in Human-in-the-Loop Reinforcement Learning},
@@ -2097,6 +2124,30 @@ Guidance with Implications for Learning Performance},
 
 %%% WWW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+@misc{Walker,
+	abstract = {
+      Many reinforcement learning domains are highly relational.Whiletraditional temporal-difference methods can be applied to these domains, they are limited in their capacity to exploit the relational nature of the domain. Our algorithm, AMBIL, constructs relational world models in the form of relational Markov decision processes (MDPs). AMBIL works backwards from collections of high-reward states, utilizing inductive logic programming to learn their preimage, logical definitions of the region of state space that leads to the high-reward states via some action. These learned preimages are chained together to form an MDP that abstractly represents the domain. AMBIL estimates the reward and transition probabilities of this MDP from past experience. Since our MDPs are small, AMBIL uses value-iteration to quickly estimate the Q-values of each action in the induced states and determine a policy. AMBIL is able to employ complex background knowledge and supports relational representations. Empirical evaluation on both synthetic domains and a sub-task of the RoboCup soccer domain shows significant performance gains compared to standard Q-learning.
+   },
+	affiliation = {University of Wisconsin; University of Minnesota},
+	author = {Walker, Trevor and Torrey, Lisa and Shavlik, Jude and Maclin, Richard},
+	copyright = {Springer-Verlag Berlin Heidelberg},
+	doi = {10.1007/978-3-540-78469-2\_27},
+	title = {Building Relational World Models for Reinforcement Learning},
+}
+
+
+
+
+@book{walsh2010efficient,
+  title={Efficient learning of relational models for sequential decision making},
+  author={Walsh, Thomas J},
+  year={2010},
+  publisher={Rutgers The State University of New Jersey-New Brunswick},
+  doi={10.7282/T370814H}
+}
+
+
+
 @inproceedings{Wang:2022:SkillPreferences,
   title={Skill Preferences: Learning to Extract and Execute Robotic Skills from Human Feedback},
   author={Wang, Xiaofei and Lee, Kimin and Hakhamaneshi, Kourosh and Abbeel, Pieter and Laskin, Michael},
@@ -2291,6 +2342,23 @@ Guidance with Implications for Learning Performance},
   pages={2291--2297},
   year={2021}
 }
+
+
+@InProceedings{pmlr-v80-zhang18k,
+  title = 	 {Composable Planning with Attributes},
+  author =       {Zhang, Amy and Sukhbaatar, Sainbayar and Lerer, Adam and Szlam, Arthur and Fergus, Rob},
+  booktitle = 	 {Proceedings of the 35th International Conference on Machine Learning},
+  pages = 	 {5842--5851},
+  year = 	 {2018},
+  editor = 	 {Dy, Jennifer and Krause, Andreas},
+  volume = 	 {80},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {10--15 Jul},
+  publisher =    {PMLR},
+  url = 	 {https://proceedings.mlr.press/v80/zhang18k.html},
+  abstract = 	 {The tasks that an agent will need to solve often are not known during training. However, if the agent knows which properties of the environment are important then, after learning how its actions affect those properties, it may be able to use this knowledge to solve complex tasks without training specifically for them. Towards this end, we consider a setup in which an environment is augmented with a set of user defined attributes that parameterize the features of interest. We propose a method that learns a policy for transitioning between “nearby” sets of attributes, and maintains a graph of possible transitions. Given a task at test time that can be expressed in terms of a target set of attributes, and a current state, our model infers the attributes of the current state and searches over paths through attribute space to get a high level plan, and then uses its low level policy to execute the plan. We show in 3D block stacking, grid-world games, and StarCraft that our model is able to generalize to longer, more complex tasks at test time by composing simpler learned policies.}
+}
+
 
 @inproceedings{Zhou:2019:CgcNet,
   title={CGC-Net: Cell Graph Convolutional Network for Grading of Colorectal Cancer Histology Images},
