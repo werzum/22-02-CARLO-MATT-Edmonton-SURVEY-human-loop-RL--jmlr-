@@ -479,42 +479,40 @@ Now that we have summarized the background on Explainability, Interactive Learni
 		\label{table:Development}
 	\end{table*}
 	
-The first step of a HITL RL model deployment process is developing the underlying model, along with problem formulation and pre-learning considerations. This entails making the model understandable to the software developers and AI experts, who want detailed insight into their model. 
+The first steps of the HITL RL model deployment process are: developing the underlying model, problem formulation, and pre-learning considerations. This makes the model understandable to the software developers and AI experts, who seek detailed insight into their model. 
 % Motivation for XAI consideration in the Development process
-Integrating considerations for explainability into this development process of RL systems is strongly recommended, since it allows the AI experts to start off in the right direction, instead of having to make costly (post-hoc) changes later on in the RL life-cycle. Decisions on the groundwork made now have large implications for the overall RL life-cycle and are likely to be hard to change later on.
+Considering explainability at this stage is strongly recommended, since it allows the AI experts to start off in the right direction, instead of having to make costly (post-hoc) changes later on in the learning life-cycle. Such decisions and considerations have large implications for the overall RL life-cycle and are likely to be hard to change later on.
 
 % Benefits - solid groundwork, avoid common errors, generate baseline
-At this stage, working with an understandable model can help to ensure the model is based on solid assumptions and comes to consistent and sound conclusions. The numerous error sources pertaining to training data, model initialization, and the initial learning process can be monitored and limited in this phase. Ensuring proper model function and architecture at this step also ensures a proper baseline for comparing the trained model against.
+At this stage, working with an understandable model helps to ensure that the model is based on solid assumptions and comes to consistent and sound conclusions. The numerous errors in training data, model initialization, and initial learning process can be monitored and limited in this phase. Designing proper model function and architecture at this step also ensures a proper baseline for comparison with the trained model.
 
-For this phase, especially challenges like exploration-exploitation trade-off and sim-to-real gap are relevant (see \ref{sec:ChallengesRL}). These determine the selection of learning algorithm and parameters, which also defines which type of explanation is applicable to the model.
+For this phase, especially challenges like exploration-exploitation trade-off, and sim-to-real gap are relevant (see \ref{sec:ChallengesRL}). These determine the selection of learning algorithm and parameters, which also defines which type of explanation is applicable to the model.
 
 \subsection{Requirements}
 % Considerations
-
-We propose primary considerations for the development stage. In the beginning, the generated explanations should be comparable to those of other model versions in order to track the progress of development. 
-
+We propose primary considerations for the development stage. In the beginning, the generated explanations should be comparable to those of other model versions in order to track the progress of development. \MO{it is hard for me to interpret this sentence. Need to discus}
 
 Further, we identify two approaches for an explainable development process. The first is a broader and more superficial evaluation of the general model behavior, which allows for a high-level inspection of the model behavior. The second is an in-depth assessment that provides a more detailed and complex model view.
 
-In the first case, explanations must be computed fast to enable a feedback loop during training. \citet{XinEtAl:2018:HITLMLFeedbackLoop} explore the implications of a quicker HITL feedback loop. The authors highlight aspects like introspection, the ability to rapidly analyze and compare the impact of changes to reuse intermediate results, and an easier end-to-end optimization by quicker feedback. With the metrics of \citet{milani2022survey}, we therefore  propose high demands for computational performance and a reduced cognitive load.
+In the first case, explanations must be computed fast to enable a feedback loop during training. \citet{XinEtAl:2018:HITLMLFeedbackLoop} explores the implications of a quicker HITL feedback loop. The authors highlight aspects like introspection, the ability to rapidly analyze and compare the impact of changes to reuse intermediate results, and an easier end-to-end optimization by quicker feedback. With the metrics of \citet{milani2022survey}, we therefore propose high demands for computational performance and a reduced cognitive load.
 
 
 In the second case, explanations require more time to compute, understand, and interpret correctly. Therefore, people can use these explanations to analyze a small number of model snapshots.
 Both approaches should complement each other since a thorough assessment of the model behavior requires both depth and breadth.
 
 % removed requirements
-Complex and detailed explanations is appropriate for the model developers, since they care more about detailed insights than easy understandability and can afford the required cognitive load. Additionally, at the development stage, computational resources are the least constrained, and the scalability of explanations is not essential either since the model is not yet fully trained and with that relies on less parameters. This results in lower demands for computational performance and less cognitive load but high fidelity as per \citet{milani2022survey}.
+Complex and detailed explanations is appropriate for the model developers, since they care more about detailed insights than clear understandability and can afford the required cognitive load. Additionally, at the development stage, computational resources are the least constrained, and the scalability of explanations is not essential as well. The reason is that the model is not yet fully trained and relies on less parameters. This results in lower demands for computational performance and less cognitive load but high fidelity. See~\citet{milani2022survey}.
 
 We identify different approaches that can help during this phase. First, pre-training can help with the groundwork of intelligent behavior and enable sensible debugging. Second, interpretability approaches should be considered at this step, since inherent understandability implemented at this step will also benefit all succeeding phases. Finally, we argue which types of explainability approaches are suitable for this phase.
 
 \subsection{Pre-Training}
 
-Pre-Training models are beneficial in the RL training workflow since they prepare the groundwork for the Human-Robot interaction and benefits HITL in several ways. It helps to 
+Pre-Training models are beneficial in the RL training workflow since they prepare the groundwork for the Human-Robot interaction and benefits HITL in several ways. They help to 
 develop useful priors, diverse behaviors, generalized policies/feedback, and efficient initial feedback by the human~\citep{daniel2016hierarchical,eysenbach2018diversity,florensa2017stochastic,hazan2019provably,LeeSmithAbbeel:2021:FeedbackPreferenceHITLLearningPEBBLE}.
 
 % Preference-based Learning
-Preference-based learning is one example for pre-training, in which a robot gives lets a human decide which is the preferred option of two possibilities (such as movement policies). This choice simplifies the difficult reward-selection process, avoiding to having to explicitly define the reward function. It is advantageous for this approach if the robot already exhibits two ''meaningful'' movement policies, rather than the normal frenetic behavior found in newly instantiated models.
-Judging an already trained model is generally easier because it has progressed past the initial noise of random initialization and hopefully shows meaningful behavior. \citet{LeeSmithAbbeel:2021:FeedbackPreferenceHITLLearningPEBBLE} gives an example for the application of pre-training and HITL feedback by applying their PEBBLE framework, and show how pre-training can be used to increase the sample/request efficiency.
+Preference-based learning is one example for pre-training, in which a robot allows a human to decide which is the preferred option of two (\MO{which tow??}) possibilities (such as movement policies). This choice simplifies the difficult reward-selection process i.e., sidesteps the need to explicitly define the reward function. It is advantageous for this approach if the robot already exhibits two ''meaningful'' movement policies, rather than the normal frenetic behavior found in newly instantiated models. \MO{needs to be cleared}
+It is worth mentioning that, judging an already trained model is generally easier because it is after the initial noise of random initialization and hopefully shows meaningful behavior. \citet{LeeSmithAbbeel:2021:FeedbackPreferenceHITLLearningPEBBLE} gives an example for the application of pre-training and HITL feedback by applying their PEBBLE framework, and show how pre-training can be used to increase the sample/request efficiency.
 
 % lifelong learning
 Generally, approaches like transfer learning and lifelong learning for RL agents are promising, since they also alleviate the problem of the noisy warm-up phase of RL \citep{taylor2009transfer,yang2021efficient}.
@@ -523,15 +521,15 @@ Generally, approaches like transfer learning and lifelong learning for RL agents
 \label{subsec:interpretability}
 % Combination with Pretraining allows to judge  ------------------------------------------------------
 
-A central approach to imbuing agents with explainability (in the broader sense) is to make them interpretable ---that is, providing an inherently understandable AI solution. Interpretable models in combination with pre-trained or otherwise initialized systems facilitate the judgment of the model and its decision making.
+A central approach to add explainability in the HITL (in the broader sense) is to make the model interpretable i.e., to provide an inherently understandable AI solution. Interpretable models in combination with pre-trained or otherwise initialized systems facilitate the judgment of the model and its decision making.
 
 %s Structural biases+ core knowledge+ innate reasoning = transparent models and decisions -------------
-\citet{RoyEtAl:2021:RLRoboticsChallenges} enumerate several approaches that would translate to more interpretable models. For one, embedding core knowledge into models (like physical constraints) could provide agents with innate reasoning capabilities, which would then facilitate checking this reasoning \citep{HaSchmidhuber:2018:CoreKnowledgeWorldModels}. A second aspect is the use of compositional language, which could facilitate a high-level understanding of the concepts the model learned. \citet{Koditschek:2021:RoboticsCompositionalLanguage} suggests that the use of model composition and with it compositional language are key elements for embodied intelligence.
+\citet{RoyEtAl:2021:RLRoboticsChallenges} enumerate several approaches that would translate to more interpretable models. For one, embedding core knowledge into models (like physical constraints) could provide agents with innate reasoning capabilities, which would then facilitate checking this reasoning \citep{HaSchmidhuber:2018:CoreKnowledgeWorldModels}. A second aspect is the use of compositional language, which could facilitate a high-level understanding of the concepts the model learned. \citet{Koditschek:2021:RoboticsCompositionalLanguage} suggests that the use of model composition and with it compositional language, are key elements for embodied intelligence.
 
 % Representative languages ----------------------------------------------------------------------------
-Additionally, a representative language could allow abstractive reasoning with rigorous generalization. This can be achieved by graph neural networks, natural language, and attention mechanisms in combination with sys1/sys2 separation \citep{RoyEtAl:2021:RLRoboticsChallenges}, and further with the inherent understandability of the learned model.
+Additionally, a representative language could allow abstractive reasoning with rigorous generalization. This can be achieved by graph neural networks, natural language, attention mechanisms in combination with sys1/sys2 separation \citep{RoyEtAl:2021:RLRoboticsChallenges}, and further with the inherent understandability of the learned model.
 % Benefit of this at the example of adversarial images -----------------------------------------------
-The advantage of a combination of innate reasoning with understandable language could allow an intuitive understanding of the model. This advantage can be best seen in comparison with the large challenge of adversarial attacks, for example, on image recognition approaches. Here, a core problem lies that the learned (and often highly performing) models focus on very different aspects than we do, and ``understand'' images on a fundamentally different level \citep{ChakrabortyEtAl:2021:SurveyAdversarialAttacks}. This of course in turn prevents humans from understanding the model and its decision-making process without the help of other tools.
+The advantage of a combination of innate reasoning with understandable language could allow an intuitive understanding of the model, which can be one building block for tackling the challenge of adversarial attacks, for example, on image recognition approaches. Here, a core problem lies that the learned (and often highly performing) models focus on very different aspects than we do, and ``understand'' images on a fundamentally different level \citep{ChakrabortyEtAl:2021:SurveyAdversarialAttacks}. This of course in turn prevents humans from understanding the model and its decision-making process without the help of other tools.
 
 \subsection{Explainability}
 
@@ -593,16 +591,16 @@ In this section, we covered the Development phase, the first of the four stages 
 	
 % has been developed, it is trained by and with a human teacher.
 
-Once developed, the agent is trained either autonomously or with the help of human input. Section~\ref{sec:Developing} discussed current explanation techniques used mainly during the development phase under close supervision of the developer. This section focuses on approaches where people act as a trainer or teacher, guiding the agent learning process.
+Once developed, the agent is trained either autonomously or with the help of human input. Section~\ref{sec:Developing} discussed current explanation techniques used mainly during the development phase under close supervision of the developer. This section focuses on approaches where humans act as a trainer or teacher (domain expert), guiding the agent learning process.
 
-Finding and determining the appropriate role of HITL should be the first step in developing an optimal mechanism for interaction. We propose that the focus should be on providing interpretable information and clear explanations to the human during this teaching process. Hence, human trainers can understand how agents perceive the world and provide better feedback.
+Finding and determining the appropriate role of HITL should be the first step in developing an optimal mechanism for interaction. We propose that the focus should be on providing interpretable information and clear explanations to the human during this teaching process to enable transparency between the parties. As a consequence, human trainers can understand how agents perceive the world and provide better feedback.
 
 Among the challenges identified in Subsection~\ref{sec:ChallengesRL}, the following are relevant to this phase: (1) determining to what extent agents should imitate or follow human advice, (2) optimizing reward shaping,  (3) choosing explanation methods and complexity according to the background knowledge and expertise of teachers, and (4) reducing the sim-to-real gap. 
 
 \subsection{Requirements}
 % Special Requirements
 % Use xAI inputs since they are fast and easy
-For one, this step is the first where a novice user may interact with the RL agent, which imposes certain requirements for a reduced complexity of the explanation. This also coincides with the requirement of rapid explanations for the sake of fluency, enabling a truly interactive training process. Interpretable inputs are well suited for these requirements, since they give rapid introspection into what the agent perceives. 
+This step is the first where a novice user may interact with the RL agent, which imposes certain requirements for a reduced complexity of the explanation. This also coincides with the requirement of rapid explanations for the sake of fluency, enabling a truly interactive training process. Interpretable inputs are well suited for these requirements, since they give rapid introspection into what the agent perceives. 
 
 % Lifted Requirements
 % Is shallow, but thats okay since we take care of this in other stages
@@ -822,7 +820,7 @@ We have now covered the four stages leading to the deployment of HITL RL systems
 
 \section{Discussion}
 \label{sec:discussion}
-We first discuss general challenges and open research directions in HITL RL approaches, and then evaluate the presented opportunities and requirements  with regards to future work. In the background section we discussed what is possible with current methods, while the four steps for HITL RL deployment focused on how current methods can be used and adapted to better suit the HITL requirements. Section /XY now focuses on further research to develop new methods and technologies to support HITL RL.
+We first discuss general challenges and open research directions in HITL RL approaches, and then evaluate the presented opportunities and requirements  with regards to future work. In the background section we discussed what is possible with current methods, while the four steps for HITL RL deployment focused on how current methods can be used and adapted to better suit the HITL requirements. Section \ref{sec:ThirdGeneration} focuses on further research to develop new methods and technologies to support HITL RL.
 
 \subsection{Open Research Directions}
 
